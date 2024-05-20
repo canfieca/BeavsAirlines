@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Beavs Airlines</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="index.js"></script>
+  </head>
+  <body>
+    
+    <nav class='navbar'>
+      <a href='index.html'>Go Beavs!</a>
+      <ul class='navlist'>
+          <!-- <li><a href='flightCrew.html'>Flight Crew</a><li>
+          <li><a href='flightPassenger.html'>Flight Passengers</a></li> -->
+          <li><a href='airports.html'>Airports</a></li>
+          <li><a href=passengers.html>Passengers</a></li>
+          <li><a href='crew.html'>Crew Members</a></li>
+          <li><a href='flights.html'>Flights</a></li>
+      </ul>
+    </nav>
+
+    <div class='airportTable'>
+        <table>
+            <tr>
+                <th>airportID</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>Number of Flights</th>
+                <th>Number of Gates</th>
+            </tr>
+
+              <tr>
+                <td>12</td>
+                <td>JFK</td>
+                <td>New York</td>
+                <td>139</td>
+                <td>38</td>
+              </tr>
+
+              <tr>
+                <td>23</td>
+                <td>ANC</td>
+                <td>Anchorage</td>
+                <td>45</td>
+                <td>12</td>
+              </tr>
+
+              <tr>
+                <td>34</td>
+                <td>ORD</td>
+                <td>Chicago</td>
+                <td>207</td>
+                <td>56</td>
+              </tr>
+              
+              <tr>
+                <td>45</td>
+                <td>LAX</td>
+                <td>Los Angeles</td>
+                <td>185</td>
+                <td>49</td>
+              </tr>
+    
+              <tr>
+                <td>47</td>
+                <td>BOS</td>
+                <td>Boston</td>
+                <td>146</td>
+                <td>39</td>
+              </tr>
+    
+              <tr>
+                <td>56</td>
+                <td>DEN</td>
+                <td>Denver</td>
+                <td>124</td>
+                <td>33</td>
+              </tr>
+    
+              <tr>
+                <td>65</td>
+                <td>SFO</td>
+                <td>San Francisco</td>
+                <td>164</td>
+                <td>44</td>
+              </tr>
+              
+              <tr>
+                <td>67</td>
+                <td>ATL</td>
+                <td>Atlanta</td>
+                <td>231</td>
+                <td>62</td>
+              </tr>
+    
+              <tr>
+                <td>71</td>
+                <td>LAS</td>
+                <td>Las Vegas</td>
+                <td>109</td>
+                <td>29</td>
+              </tr>
+    
+              <tr>
+                <td>78</td>
+                <td>SEA</td>
+                <td>Seattle</td>
+                <td>173</td>
+                <td>46</td>
+              </tr>
+              
+              <tr>
+                <td>89</td>
+                <td>MIA</td>
+                <td>Miami</td>
+                <td>119</td>
+                <td>32</td>
+              </tr>
+              
+              <tr>
+                <td>100</td>
+                <td>HNL</td>
+                <td>Honolulu</td>
+                <td>92</td>
+                <td>25</td>
+              </tr>
+              
+        </table>
+    </div>
+    
+
+      <section class='crud'>
+        <div class='options'>
+            <form class='create'>
+                <h1>Add a Airport</h1>
+                <div>
+                    <label for='name'>Enter the name of the airport:</label>
+                    <input name='name'></input>
+                </div>
+                <div>
+                    <label for='city'>Enter the city the airport is located:</label>
+                    <input name='city'></input>
+                </div>
+                <div>
+                  <label for='numOfFlights'>Add the number of flights it has:</label>
+                  <input name='numOfFlights'></input>
+                </div>
+                <div>
+                    <label for='numOfGates'>Add the number of gates it has:</label>
+                    <input name='numOfGates'></input>
+                </div>
+                <button type="submit">Add</button>
+            </form>
+            <form class='update'>
+                <h1>Update an airport</h1>
+                
+                <div>
+                    <label for='pickAirport'>Pick an airport to modify</label>
+                    <select name='pickAirport'>
+                        <option value='12'>12</option>
+                        <option value='23'>23</option>
+                        <option value='34'>34</option>
+                        <option value='45'>45</option>
+                        <option value='47'>47</option>
+                        <option value='56'>56</option>
+                        <option value='65'>65</option>
+                        <option value='67'>67</option>
+                        <option value='71'>71</option>
+                        <option value='78'>78</option>
+                        <option value='89'>89</option>
+                        <option value='100'>100</option>
+                    </select>
+
+                </div>
+                
+                <div>
+                    <label for='city'>Update the city of the airport</label>
+                    <input name='city'></input>
+                </div>
+                <div>
+                    <label for='numOfFlights'>Update the number of flights it has:</label>
+                    <input name='numOfFlights'></input>
+                </div>
+                <div>
+                    <label for='numOfGates'>Update the number of gates it has:</label>
+                    <input name='numOfGates'></input>
+                </div>
+
+                <button type="submit">Update</button>
+            </form>
+            <form class='delete'>
+                <h1>Delete an Airport</h1>
+                <div>
+                    <label for='pickAirport'>Pick an airport to delete from the list</label>
+                    <select name='pickAirport'>
+                        <option value='12'>12</option>
+                        <option value='23'>23</option>
+                        <option value='34'>34</option>
+                        <option value='45'>45</option>
+                        <option value='47'>47</option>
+                        <option value='56'>56</option>
+                        <option value='65'>65</option>
+                        <option value='67'>67</option>
+                        <option value='71'>71</option>
+                        <option value='78'>78</option>
+                        <option value='89'>89</option>
+                        <option value='100'>100</option>
+                    </select>
+                    <button>Delete</button>
+                </div>
+            </form>
+        </div>
+      </section>
+
+  </body>
+</html>
