@@ -11,23 +11,26 @@
 
 // SQL queries
 var select_queries = {
-	flightcrew: "SELECT FlightCrew.flightID, CrewMembers.firstName, CrewMembers.lastName FROM FlightCrew INNER JOIN CrewMembers ON FlightCrew.employeeID = CrewMembers.employeeID GROUP BY FlightCrew.flightID ORDER BY FlightCrew.flightID ASC;",
+	flightcrew: "SELECT FlightCrew.flightID, CrewMembers.employeeID, CrewMembers.firstName, CrewMembers.lastName FROM FlightCrew INNER JOIN CrewMembers ON FlightCrew.employeeID = CrewMembers.employeeID GROUP BY FlightCrew.flightID ORDER BY FlightCrew.flightID ASC;",
 	flightpassengers: "SELECT FlightPassengers.flightID, Passengers.firstName, Passengers.lastName, FlightPasssengers.seatNum, FlightPassengers.isFirstClass, FlightPassengers.isCheckedIn FROM FlightPassengers INNER JOIN Passengers ON FlightPassengers.passengerID = Passengers.passengerID GROUP BY FlightPassengers.flightID ORDER BY FlightPassengers.flightID ASC;"
 };
 
-var insert_queries = {
-	// construct insert query for FlightPassengers
-	flightpassengers: function(flight_id, passenger_id, seat_num, is_first_class, is_checked_in) {
-		var query = "INSERT INTO FlightPassengers (flightID, passengerID, seatNum, isFirstClass, isCheckedIn) VALUES (";
-		query += JSON.stringify(flight_id) + ", ";
-		query += JSON.stringify(passenger_id) + ", ";
-		query += JSON.stringify(seat_num) + ", ";
-		query += JSON.stringify(is_first_class) + ", ";
-		query += JSON.stringify(is_checked_in) + ");";
-		return query;
-	}
+/*
+*  Function to construct insert query for FlightPassengers
+*  intersection table using data received from client
+*/
+function create_flight_passengers_insert_query(record_info) {
+	var query = "INSERT INTO FlightPassengers (flightID, passengerID, seatNum, isFirstClass, isCheckedIn) VALUES (";
+	query += JSON.stringify(record_info.flight_id) + ", ";
+	query += JSON.stringify(record_info.passenger_id) + ", ";
+	query += JSON.stringify(record_info.seat_num) + ", ";
+	query += JSON.stringify(record_info.is_first_class) + ", ";
+	query += JSON.stringify(record_info.is_checked_in) + ");";
+	return query;
 };
 
+// File system
+const fs = require('fs');
 
 // Express
 var express = require('express'); // include express library for web server
@@ -72,7 +75,31 @@ app.get('/crew.html', function(req, res) {
 });
 
 app.get('/flightCrew.html', function(req, res) {
-    res.status(200).sendFile('html/flightCrew.html', {root: __dirname});
+    // res.status(200).sendFile('html/flightCrew.html', {root: __dirname});
+
+	// get the template for the html file
+	var flight_crew_html = fs.readFileSync('./templates/flightCrew.html');
+
+	// get the data for this entity from DB
+	db.pool.query(select_queries['flightcrew'], function(err, results, fields) {
+		// query returns a list of JSON objects (all the records in entity)
+		// loop through them, templatize them to the html
+		results.forEach(function(record) {
+			var tr_element = "<tr>";
+			tr_element += "<th>" + JSON.stringify(record.flightID) + "</th>";
+			tr_element += "<th>" + JSON.stringify(record.employeeID) + "</th>";
+			tr_element += "<th>" + record.firstName + "</th>";
+			tr_element += "<th>" + record.lastName + "</th>";
+			tr_element += "</tr>";
+
+			// add record (now in html form) to html template
+			flight_crew_html += tr_element;
+		});
+	});
+
+	// after data has been retrieved from DB, send the HTML file
+	flight_crew_html += "</table></body></html>";
+	res.status(200).send(flight_crew_html);
 });
 
 app.get('/flightPassenger.html', function(req, res) {
@@ -112,7 +139,7 @@ app.get('/insert/:table', function(req, res) {
 		var record_info = JSON.parse(data);
 
 		// use information for the new record to make an SQL query, and execute it
-		db.pool.query(insert_queries[table](record_info)); // I have no idea if this works
+		db.pool.query(create_flight_passengers_insert_query(record_info));
 	});
 });
 
