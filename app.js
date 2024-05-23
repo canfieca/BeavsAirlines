@@ -84,21 +84,24 @@ app.get('/flightCrew.html', function(req, res) {
 	db.pool.query(select_queries['flightcrew'], function(err, results, fields) {
 		// query returns a list of JSON objects (all the records in entity)
 		// loop through them, templatize them to the html
-		results.forEach(function(record) {
-			var tr_element = "<tr>";
-			tr_element += "<th>" + JSON.stringify(record.flightID) + "</th>";
-			tr_element += "<th>" + JSON.stringify(record.employeeID) + "</th>";
-			tr_element += "<th>" + record.firstName + "</th>";
-			tr_element += "<th>" + record.lastName + "</th>";
-			tr_element += "</tr>";
+		// results.forEach(function(record) {
+		// 	var tr_element = "<tr>";
+		// 	tr_element += "<th>" + JSON.stringify(record.flightID) + "</th>";
+		// 	tr_element += "<th>" + JSON.stringify(record.employeeID) + "</th>";
+		// 	tr_element += "<th>" + record.firstName + "</th>";
+		// 	tr_element += "<th>" + record.lastName + "</th>";
+		// 	tr_element += "</tr>";
 
-			// add record (now in html form) to html template
-			flight_crew_html += tr_element;
-		});
+		// 	// add record (now in html form) to html template
+		// 	flight_crew_html += tr_element;
+		// });
+
+		// flight_crew_html += JSON.stringify(results[0]);
+		flight_crew_html += "<p>THIS IS A TEST</p>";
 	});
 
 	// after data has been retrieved from DB, send the HTML file
-	flight_crew_html += "</table></body></html>";
+	flight_crew_html += "<p>AHHHHHHHHH</p> </body></html>";
 	res.status(200).send(flight_crew_html);
 });
 
@@ -120,6 +123,7 @@ app.get('/select/:table', function(req, res) {
 	var table = req.params.table;
 	db.pool.query(select_queries[table], function(err, results, fields) {
 		let base = "<h2>Contents of " + JSON.stringify(table) + "</h2>";
+		base += "<h3>Type of table: " + JSON.stringify(typeof(table)) + "</h3>";
 		res.send(base + JSON.stringify(results));
 	});
 });
