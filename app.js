@@ -29,8 +29,7 @@ function make_flight_passengers_insert_query(record_info) {
 	return query;
 }
 
-// modularize this function !!
-
+// TODO: modularize this function !!
 function make_flight_crew_delete_query(record_info) {
 	var query = "DELETE FROM FlightCrew WHERE flightID = ";
 	query += JSON.stringify(record_info.flightID);
@@ -40,6 +39,9 @@ function make_flight_crew_delete_query(record_info) {
 
 	return query;
 }
+
+const os = require('os')
+console.log("Hostname: ", os.hostname())
 
 // File system
 const fs = require('fs');
@@ -55,6 +57,7 @@ var db = require('./db_connector');
 // Create & populate database entities
 db.pool.query("source ./database/DDL.sql;");
 
+
 // Information logger function
 app.use(function (req, res, next) {
 	console.log("== Request made");
@@ -63,9 +66,10 @@ app.use(function (req, res, next) {
 	next();
 });
 
+
 // Routing functions
 app.get('/', function(req, res) {
-    res.status(200).sendFile('html/index.html', {root: __dirname});
+    res.status(200).sendFile('public/html/index.html', {root: __dirname});
 });
 
 app.get('/index.html', function(req, res) {
@@ -96,8 +100,6 @@ app.get('/flightCrew.html', function(req, res) {
 	// get the data for this entity from DB
 	db.pool.query(select_queries['flightcrew'], function(err, results, fields) {
 
-		console.log(results)
-
 		// query returns a list of JSON objects (all the records in entity)
 		// loop through them, templatize them to the html
 		results.forEach(function(record) {
@@ -123,9 +125,7 @@ app.get('/flightPassenger.html', function(req, res) {
 });
 
 app.get('/flights.html', function(req, res) {
-    // res.status(200).sendFile('public/html/flights.html', {root: __dirname});
-	var flights_html = fs.readFileSync('./public/html/flights.html');
-	res.status(200).send(flights_html);
+    res.status(200).sendFile('public/html/flights.html', {root: __dirname});
 });
 
 app.get('/passengers.html', function(req, res) {
@@ -138,7 +138,7 @@ app.get('/index.js', function(req, res) {
 
 
 // Database queries
-app.get('/select/:table', function(req, res) {
+app.get('/select/:table', function(req, res) {					// TODO: update this function, it is currently configured for testing purposes
 	var table = req.params.table;
 	db.pool.query(select_queries[table], function(err, results, fields) {
 		let base = "<h2>Contents of " + JSON.stringify(table) + "</h2>";
@@ -147,7 +147,7 @@ app.get('/select/:table', function(req, res) {
 	});
 });
 
-app.get('/insert/:table', function(req, res) {
+app.get('/insert/:table', function(req, res) {   // TODO: update this function, I haven't tested it yet
 	var table = req.params.table;
 	var data = "";
 
@@ -166,7 +166,7 @@ app.get('/insert/:table', function(req, res) {
 	});
 });
 
-app.delete('/delete/:table', function(req, res) {
+app.post('/delete/:table', function(req, res) {
 	var table = req.params.table;
 	var data = "";
 
@@ -180,14 +180,16 @@ app.delete('/delete/:table', function(req, res) {
 	req.on("end", () => {
 		console.log(data)
 
-		// convert string into JSON object
-		var record_info = JSON.parse(data);
+		// TODO: receive & parse data properly, perform database operation(s), and send page back to client
 
-		console.log(record_info)
+		// // convert string into JSON object
+		// var record_info = JSON.parse(data);
 
-		var query = make_flight_crew_delete_query(record_info);
+		// console.log(record_info)
 
-		console.log(query)
+		// var query = make_flight_crew_delete_query(record_info);
+
+		// console.log(query)
 	});
 });
 
