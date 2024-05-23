@@ -27,10 +27,18 @@ function make_flight_passengers_insert_query(record_info) {
 	query += JSON.stringify(record_info.is_first_class) + ", ";
 	query += JSON.stringify(record_info.is_checked_in) + ");";
 	return query;
-};
+}
+
+// modularize this function !!
 
 function make_flight_crew_delete_query(record_info) {
-	var query = "DELETE FROM FlightCrew WHERE ";
+	var query = "DELETE FROM FlightCrew WHERE flightID = ";
+	query += JSON.stringify(record_info.flightID);
+	query += " AND employeeID = ";
+	query += JSON.stringify(record_info.employeeID);
+	query += ";";
+
+	return query;
 }
 
 // File system
@@ -145,6 +153,27 @@ app.get('/insert/:table', function(req, res) {
 
 		// use information for the new record to make an SQL query, and execute it
 		db.pool.query(make_flight_passengers_insert_query(record_info));
+	});
+});
+
+app.get('/delete/:table', function(req, res) {
+	var table = req.params.table;
+	var data = "";
+
+	// get data from request body
+	req.on("data", chunk => {
+		data += chunk;
+	});
+
+	req.on("end", () => {
+		// convert string into JSON object
+		var record_info = JSON.parse(data);
+
+		console.log(record_info)
+
+		var query = make_flight_crew_delete_query(record_info);
+
+		console.log(query)
 	});
 });
 
