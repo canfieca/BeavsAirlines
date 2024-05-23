@@ -19,7 +19,7 @@ var select_queries = {
 *  Function to construct insert query for FlightPassengers
 *  intersection table using data received from client
 */
-function create_flight_passengers_insert_query(record_info) {
+function make_flight_passengers_insert_query(record_info) {
 	var query = "INSERT INTO FlightPassengers (flightID, passengerID, seatNum, isFirstClass, isCheckedIn) VALUES (";
 	query += JSON.stringify(record_info.flight_id) + ", ";
 	query += JSON.stringify(record_info.passenger_id) + ", ";
@@ -28,6 +28,10 @@ function create_flight_passengers_insert_query(record_info) {
 	query += JSON.stringify(record_info.is_checked_in) + ");";
 	return query;
 };
+
+function make_flight_crew_delete_query(record_info) {
+	var query = "DELETE FROM FlightCrew WHERE ";
+}
 
 // File system
 const fs = require('fs');
@@ -51,8 +55,6 @@ app.use(function (req, res, next) {
 	next();
 });
 
-
-
 // Routing functions
 app.get('/', function(req, res) {
     res.status(200).sendFile('html/index.html', {root: __dirname});
@@ -75,34 +77,33 @@ app.get('/crew.html', function(req, res) {
 });
 
 app.get('/flightCrew.html', function(req, res) {
-    // res.status(200).sendFile('html/flightCrew.html', {root: __dirname});
 
 	// get the template for the html file
 	var flight_crew_html = fs.readFileSync('./templates/flightCrew.html');
 
 	// get the data for this entity from DB
 	db.pool.query(select_queries['flightcrew'], function(err, results, fields) {
+
+		console.log(results)
+
 		// query returns a list of JSON objects (all the records in entity)
 		// loop through them, templatize them to the html
-		// results.forEach(function(record) {
-		// 	var tr_element = "<tr>";
-		// 	tr_element += "<th>" + JSON.stringify(record.flightID) + "</th>";
-		// 	tr_element += "<th>" + JSON.stringify(record.employeeID) + "</th>";
-		// 	tr_element += "<th>" + record.firstName + "</th>";
-		// 	tr_element += "<th>" + record.lastName + "</th>";
-		// 	tr_element += "</tr>";
+		results.forEach(function(record) {
+			var tr_element = "<tr>";
+			tr_element += "<th>" + JSON.stringify(record.flightID) + "</th>";
+			tr_element += "<th>" + JSON.stringify(record.employeeID) + "</th>";
+			tr_element += "<th>" + record.firstName + "</th>";
+			tr_element += "<th>" + record.lastName + "</th>";
+			tr_element += "</tr>";
 
-		// 	// add record (now in html form) to html template
-		// 	flight_crew_html += tr_element;
-		// });
+			// add record (now in html form) to html template
+			flight_crew_html += tr_element;
+		});
 
-		// flight_crew_html += JSON.stringify(results[0]);
-		flight_crew_html += "<p>THIS IS A TEST</p>";
+		// populate the remainder of the page and send it to client
+		flight_crew_html += fs.readFileSync('./templates/flightCrew2.html');
+		res.status(200).send(flight_crew_html);
 	});
-
-	// after data has been retrieved from DB, send the HTML file
-	flight_crew_html += "<p>AHHHHHHHHH</p> </body></html>";
-	res.status(200).send(flight_crew_html);
 });
 
 app.get('/flightPassenger.html', function(req, res) {
@@ -143,7 +144,7 @@ app.get('/insert/:table', function(req, res) {
 		var record_info = JSON.parse(data);
 
 		// use information for the new record to make an SQL query, and execute it
-		db.pool.query(create_flight_passengers_insert_query(record_info));
+		db.pool.query(make_flight_passengers_insert_query(record_info));
 	});
 });
 
