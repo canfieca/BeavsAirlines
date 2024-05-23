@@ -1,5 +1,14 @@
 // delete_flightCrew.js
 
+var delete_button = document.getElementById('delete-button');
+
+console.log(document)
+console.log(document.getElementById('delete-button'))
+
+// delete_button.addEventListener('click', () => {
+//     delete_crew_member();
+// })
+
 function delete_crew_member() {
     // Get the values entered by the user
     const flightID = document.getElementById('flightID').value;
@@ -11,9 +20,11 @@ function delete_crew_member() {
         employeeID
     };
 
+    console.log(data)
+
     // Send the data to app.js using fetch
-    fetch('http://flip3.engr.oregonstate.edu:43043/delete/flightcrew', {
-        method: 'POST',
+    fetch('/delete/flightcrew', {
+        method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
         },

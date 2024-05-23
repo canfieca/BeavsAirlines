@@ -69,19 +69,23 @@ app.get('/', function(req, res) {
 });
 
 app.get('/index.html', function(req, res) {
-    res.status(200).sendFile('html/index.html', {root: __dirname});
+    res.status(200).sendFile('public/html/index.html', {root: __dirname});
 });
 
 app.get('/style.css', function(req, res) {
-	res.status(200).sendFile('css/style.css', {root: __dirname});
+	res.status(200).sendFile('public/css/style.css', {root: __dirname});
 });
 
 app.get('/airports.html', function(req, res) {
-    res.status(200).sendFile('html/airports.html', {root: __dirname});
+    res.status(200).sendFile('public/html/airports.html', {root: __dirname});
 });
 
 app.get('/crew.html', function(req, res) {
-    res.status(200).sendFile('html/crew.html', {root: __dirname});
+    res.status(200).sendFile('public/html/crew.html', {root: __dirname});
+});
+
+app.get('/delete_flightCrew.js', function(req, res) {
+    res.status(200).sendFile('public/js/delete_flightCrew.js', {root: __dirname});
 });
 
 app.get('/flightCrew.html', function(req, res) {
@@ -115,16 +119,22 @@ app.get('/flightCrew.html', function(req, res) {
 });
 
 app.get('/flightPassenger.html', function(req, res) {
-    res.status(200).sendFile('html/flightPassenger.html', {root: __dirname});
+    res.status(200).sendFile('public/html/flightPassenger.html', {root: __dirname});
 });
 
 app.get('/flights.html', function(req, res) {
-    res.status(200).sendFile('html/flights.html', {root: __dirname});
+    // res.status(200).sendFile('public/html/flights.html', {root: __dirname});
+	var flights_html = fs.readFileSync('./public/html/flights.html');
+	res.status(200).send(flights_html);
 });
 
 app.get('/passengers.html', function(req, res) {
-    res.status(200).sendFile('html/passengers.html', {root: __dirname});
+    res.status(200).sendFile('public/html/passengers.html', {root: __dirname});
 });
+
+app.get('/index.js', function(req, res) {
+	res.status(200).sendFile('public/js/index.js', {root: __dirname})
+})
 
 
 // Database queries
@@ -156,9 +166,11 @@ app.get('/insert/:table', function(req, res) {
 	});
 });
 
-app.get('/delete/:table', function(req, res) {
+app.delete('/delete/:table', function(req, res) {
 	var table = req.params.table;
 	var data = "";
+
+	console.log("INSIDE /delete/:table")
 
 	// get data from request body
 	req.on("data", chunk => {
@@ -166,6 +178,8 @@ app.get('/delete/:table', function(req, res) {
 	});
 
 	req.on("end", () => {
+		console.log(data)
+
 		// convert string into JSON object
 		var record_info = JSON.parse(data);
 
