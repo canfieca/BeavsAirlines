@@ -60,10 +60,9 @@ SELECT * FROM Flights;
 SELECT * FROM Airports;
 
 -- FlightCrew:
-SELECT FlightCrew.flightID, CrewMembers.firstName, CrewMembers.lastName
+SELECT FlightCrew.flightID, FlightCrew.employeeID, CrewMembers.firstName, CrewMembers.lastName
 FROM FlightCrew
 INNER JOIN CrewMembers ON FlightCrew.employeeID = CrewMembers.employeeID
-GROUP BY FlightCrew.flightID
 ORDER BY FlightCrew.flightID ASC;
 
 -- FlightPassengers:
@@ -111,3 +110,7 @@ UPDATE FlightPassengers
 SET seatNum = $seat_num, isFirstClass = $isFirstClass,
     isCheckedIn = $is_checked_in
 WHERE passengerID = $passenger_id AND flightID = $flight_id;
+
+UPDATE FlightCrew
+SET flightID = $new_flight_id, employeeID = $new_employee_id
+WHERE flightID = $flight_id AND employeeID = $employee_id

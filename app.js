@@ -11,30 +11,37 @@
 
 // SQL queries
 var select_queries = {
-	flightcrew: "SELECT FlightCrew.flightID, CrewMembers.employeeID, CrewMembers.firstName, CrewMembers.lastName FROM FlightCrew INNER JOIN CrewMembers ON FlightCrew.employeeID = CrewMembers.employeeID GROUP BY FlightCrew.flightID ORDER BY FlightCrew.flightID ASC;",
+	flightcrew: "SELECT FlightCrew.flightID, CrewMembers.employeeID, CrewMembers.firstName, CrewMembers.lastName FROM FlightCrew INNER JOIN CrewMembers ON FlightCrew.employeeID = CrewMembers.employeeID ORDER BY FlightCrew.flightID ASC;",
 	flightpassengers: "SELECT FlightPassengers.flightID, Passengers.firstName, Passengers.lastName, FlightPasssengers.seatNum, FlightPassengers.isFirstClass, FlightPassengers.isCheckedIn FROM FlightPassengers INNER JOIN Passengers ON FlightPassengers.passengerID = Passengers.passengerID GROUP BY FlightPassengers.flightID ORDER BY FlightPassengers.flightID ASC;"
 };
 
-/*
-*  Function to construct insert query for FlightPassengers
-*  intersection table using data received from client
-*/
-function make_flight_passengers_insert_query(record_info) {
-	var query = "INSERT INTO FlightPassengers (flightID, passengerID, seatNum, isFirstClass, isCheckedIn) VALUES (";
-	query += JSON.stringify(record_info.flight_id) + ", ";
-	query += JSON.stringify(record_info.passenger_id) + ", ";
-	query += JSON.stringify(record_info.seat_num) + ", ";
-	query += JSON.stringify(record_info.is_first_class) + ", ";
-	query += JSON.stringify(record_info.is_checked_in) + ");";
+
+function make_flight_crew_insert_query(record_info) {
+	var query = "INSERT INTO FlightCrew (flightID, employeeID) VALUES (";
+	query += record_info.flightID + ", " + record_info.employeeID + ");";
+
+	return query;
+}
+
+function make_flight_crew_update_query(record_info) {
+	var query = "UPDATE FlightCrew SET flightID = ";
+	query += record_info.new_flightID;
+	query += ", employeeID = ";
+	query += record_info.new_employeeID;
+	query += " WHERE flightID = ";
+	query += record_info.flightID;
+	query += " AND employeeID = ";
+	query += record_info.employeeID;
+
 	return query;
 }
 
 // TODO: modularize this function !!
 function make_flight_crew_delete_query(record_info) {
 	var query = "DELETE FROM FlightCrew WHERE flightID = ";
-	query += JSON.stringify(record_info.flightID);
+	query += record_info.flightID;
 	query += " AND employeeID = ";
-	query += JSON.stringify(record_info.employeeID);
+	query += record_info.employeeID;
 	query += ";";
 
 	return query;
@@ -55,7 +62,9 @@ PORT = 43043;                     // set a port number for server to listen on
 var db = require('./db_connector');
 
 // Create & populate database entities
-db.pool.query("source ./database/DDL.sql;");
+// db.pool.query("source ./database/DDL.sql;", function(err, results, fields) {
+// 	console.log("populating database!")
+// });
 
 
 // Information logger function
@@ -88,8 +97,8 @@ app.get('/crew.html', function(req, res) {
     res.status(200).sendFile('public/html/crew.html', {root: __dirname});
 });
 
-app.get('/delete_flightCrew.js', function(req, res) {
-    res.status(200).sendFile('public/js/delete_flightCrew.js', {root: __dirname});
+app.get('/flightCrew.js', function(req, res) {
+    res.status(200).sendFile('public/js/flightCrew.js', {root: __dirname});
 });
 
 app.get('/flightCrew.html', function(req, res) {
@@ -100,10 +109,13 @@ app.get('/flightCrew.html', function(req, res) {
 	// get the data for this entity from DB
 	db.pool.query(select_queries['flightcrew'], function(err, results, fields) {
 
+		console.log(results)
+
 		// query returns a list of JSON objects (all the records in entity)
 		// loop through them, templatize them to the html
 		results.forEach(function(record) {
-			var tr_element = "<tr>";
+			var tr_element = '<tr id="flightcrew-primary-key-';
+			tr_element += JSON.stringify(record.flightID) + "-" + JSON.stringify(record.employeeID) + '">';
 			tr_element += "<th>" + JSON.stringify(record.flightID) + "</th>";
 			tr_element += "<th>" + JSON.stringify(record.employeeID) + "</th>";
 			tr_element += "<th>" + record.firstName + "</th>";
@@ -137,18 +149,7 @@ app.get('/index.js', function(req, res) {
 })
 
 
-// Database queries
-app.get('/select/:table', function(req, res) {					// TODO: update this function, it is currently configured for testing purposes
-	var table = req.params.table;
-	db.pool.query(select_queries[table], function(err, results, fields) {
-		let base = "<h2>Contents of " + JSON.stringify(table) + "</h2>";
-		base += "<h3>Type of table: " + JSON.stringify(typeof(table)) + "</h3>";
-		res.send(base + JSON.stringify(results));
-	});
-});
-
-app.get('/insert/:table', function(req, res) {   // TODO: update this function, I haven't tested it yet
-	var table = req.params.table;
+app.post('/add/:table', function(req, res) {
 	var data = "";
 
 	// get data from request body
@@ -156,21 +157,24 @@ app.get('/insert/:table', function(req, res) {   // TODO: update this function, 
 		data += chunk;
 	});
 
-	// once we have finished receiving data
 	req.on("end", () => {
+		
 		// convert string into JSON object
 		var record_info = JSON.parse(data);
 
-		// use information for the new record to make an SQL query, and execute it
-		db.pool.query(make_flight_passengers_insert_query(record_info));
+		var query = make_flight_crew_insert_query(record_info);
+
+		// add record to DB
+		db.pool.query(query, function(err, results, fields) {
+			console.log(err, results)
+		});
 	});
-});
 
-app.post('/delete/:table', function(req, res) {
-	var table = req.params.table;
+	res.status(200).send("Success");
+})
+
+app.post('/update/:table', function(req, res) {
 	var data = "";
-
-	console.log("INSIDE /delete/:table")
 
 	// get data from request body
 	req.on("data", chunk => {
@@ -178,18 +182,41 @@ app.post('/delete/:table', function(req, res) {
 	});
 
 	req.on("end", () => {
-		console.log(data)
+		
+		// convert string into JSON object
+		var record_info = JSON.parse(data);
 
-		// TODO: receive & parse data properly, perform database operation(s), and send page back to client
+		var query = make_flight_crew_update_query(record_info);
 
-		// // convert string into JSON object
-		// var record_info = JSON.parse(data);
+		console.log(query)
 
-		// console.log(record_info)
+		// update record in DB
+		db.pool.query(query, function(err, results, fields) {
+			console.log(err, results)
+		});
+	});
 
-		// var query = make_flight_crew_delete_query(record_info);
+	res.status(200).send("Success");
+})
 
-		// console.log(query)
+app.delete('/delete/:table', function(req, res) {
+	var table = req.params.table;
+	var data = "";
+
+	// get data from request body
+	req.on("data", chunk => {
+		data += chunk;
+	});
+
+	req.on("end", () => {
+
+		// convert string into JSON object
+		var record_info = JSON.parse(data);
+
+		var query = make_flight_crew_delete_query(record_info);
+
+		// delete record from DB
+		db.pool.query(query);
 	});
 });
 

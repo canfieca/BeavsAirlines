@@ -6,7 +6,7 @@
             <h1>Add a Flight Crew Member</h1>
             <div>
                 <label for='flightID'>Pick which flight you'd like to add a new passenger</label>
-                <select name='flightID'>
+                <select name='flightID' id="flightID-add-select">
                     <option value='1'>1</option>
                     <option value='2'>2</option>
                     <option value='3'>3</option>
@@ -17,7 +17,7 @@
             </div>
             <div>
                 <label for='passengerID'>Pick which crew member you'd like to add to the flight</label>
-                <select name='passengerID'>
+                <select name='passengerID' id="employeeID-add-select">
                     <option value='1'>1</option>
                     <option value='2'>2</option>
                     <option value='3'>3</option>
@@ -26,21 +26,13 @@
                     <option value='6'>6</option>
                 </select>
             </div>
-            <div>
-                <label for='firstName'>Enter their first name</label>
-                <input name="firstName"></input>
-            </div>
-            <div>
-                <label for='lastName'>Enter their last name</label>
-                <input name="lastName"></input>
-            </div>
-            <button type="submit">Add</button>
+            <button type="button" onclick="add_flightcrew_record()">Add</button>
         </form>
         <form class='update'>
             <h1>Update a Flight Passenger</h1>
             <div>
                 <label for='pickFlightCrewID'>Please pick which flight and crew member you'd like to update</label>
-                <select name='pickFlightCrewID'>
+                <select name='pickFlightCrewID' id="flightID-update-select">
                     <option value='1'>1</option>
                     <option value='2'>2</option>
                     <option value='3'>3</option>
@@ -48,7 +40,7 @@
                     <option value='5'>5</option>
                     <option value='6'>6</option>
                 </select>
-                <select name='pickFlightCrewID'>
+                <select name='pickFlightCrewID' id="employeeID-update-select">
                     <option value='1'>1</option>
                     <option value='2'>2</option>
                     <option value='3'>3</option>
@@ -58,20 +50,31 @@
                 </select>
             </div>
             <div>
-                <label for='firstName'>Update their first name</label>
-                <input name="firstName"></input>
+                <label for='pickFlightCrewID'>Please select the new flightID and/or employeeID for this record</label>
+                <select name='pickFlightCrewID' id="flightID-new-value-update-select">
+                    <option value='1'>1</option>
+                    <option value='2'>2</option>
+                    <option value='3'>3</option>
+                    <option value='4'>4</option>
+                    <option value='5'>5</option>
+                    <option value='6'>6</option>
+                </select>
+                <select name='pickFlightCrewID' id="employeeID-new-value-update-select">
+                    <option value='1'>1</option>
+                    <option value='2'>2</option>
+                    <option value='3'>3</option>
+                    <option value='4'>4</option>
+                    <option value='5'>5</option>
+                    <option value='6'>6</option>
+                </select>
             </div>
-            <div>
-                <label for='lastName'>Update their last name</label>
-                <input name="lastName"></input>
-            </div>
-            <button type="submit">Update</button>
+            <button type="button" onclick="update_flightcrew_record()">Update</button>
         </form>
         <form class='delete'>
             <h1>Pick which flight and crew member you'd like to remove</h1>
             <div>
                 <label for='deleteFlightCrew'>Please pick which flight and crew member you'd like to remove</label>
-                <select name='deleteFlightCrew'>
+                <select name='deleteFlightCrew' id="flightID-delete-select">
                     <option value='1'>1</option>
                     <option value='2'>2</option>
                     <option value='3'>3</option>
@@ -79,7 +82,7 @@
                     <option value='5'>5</option>
                     <option value='6'>6</option>
                 </select>
-                <select name='deleteFlightCrew'>
+                <select name='deleteFlightCrew' id="employeeID-delete-select">
                     <option value='1'>1</option>
                     <option value='2'>2</option>
                     <option value='3'>3</option>

@@ -84,7 +84,6 @@ VALUES
 CREATE OR REPLACE TABLE FlightCrew (
   flightID int(11) NOT NULL,
   employeeID int(11) NOT NULL,
-  PRIMARY KEY (flightID, employeeID),
   FOREIGN KEY (flightID) REFERENCES Flights(flightID)
   ON DELETE CASCADE,
   FOREIGN KEY (employeeID) REFERENCES CrewMembers(employeeID)
