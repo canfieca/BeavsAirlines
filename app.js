@@ -127,6 +127,7 @@ app.post('/add/:table', function(req, res) {
 		});
 	});
 
+	// send message back so client reloads page
 	res.status(200).send("Success");
 })
 
@@ -153,6 +154,7 @@ app.post('/update/:table', function(req, res) {
 		});
 	});
 
+	// send message back so client reloads page
 	res.status(200).send("Success");
 })
 
@@ -175,6 +177,9 @@ app.delete('/delete/:table', function(req, res) {
 		// delete record from DB
 		db.pool.query(query);
 	});
+
+	// send message back so client reloads page
+	res.status(200).send("Success");
 });
 
 // Listener

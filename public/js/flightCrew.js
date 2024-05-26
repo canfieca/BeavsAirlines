@@ -75,18 +75,6 @@ function delete_crew_member() {
         body: JSON.stringify(data)
     })
     .then(response => {
-        if (response.ok) {
-            console.log('Values sent successfully');
-        } else {
-            console.error('Error sending values');
-        }
+        window.location.reload();
     })
-    .catch(error => {
-        console.error('Error sending values:', error);
-    });
-
-    // update html
-    var id = "flightcrew-primary-key-" + flightID_val + "-" + employeeID_val;
-    var record = document.getElementById(id);
-    record.remove();
 }

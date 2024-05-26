@@ -91,7 +91,7 @@ function generate_remaining_flight_crew_html(flightIDs, employeeIDs, flightCrew_
 						<form class='create'>
 							<h1>Add a Flight Crew Member</h1>
 							<div>
-								<label for='flightID'>Pick which flight you'd like to add a new passenger</label>
+								<label for='flightID'>Pick which flight you'd like to add a new crew member</label>
 								<select name='flightID' id="flightID-add-select">`;
 	
 	flightIDs.forEach( (id) => {
