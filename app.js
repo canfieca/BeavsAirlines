@@ -85,7 +85,7 @@ app.get('/:file', function(req, res) {
 		res.status(200).sendFile('/public/js/' + file, {root: __dirname});
 	
 	else if (file === 'airports.html') 
-		res.status(200).sendFile('public/html/airports.html', {root: __dirname});
+		render.generate_airports_page(db, res);
 	
 	else if (file === 'crew.html') 
 		res.status(200).sendFile('public/html/crew.html', {root: __dirname});
