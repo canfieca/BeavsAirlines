@@ -120,7 +120,7 @@ app.get('/:file', function(req, res) {
 		render.generate_airports_page(db, res);
 	
 	else if (file === 'crew.html') 
-		res.status(200).sendFile('public/html/crew.html', {root: __dirname});
+		render.generate_crew_members_page(db, res);
 	
 	else if (file === 'flights.html') 
 		res.status(200).sendFile('public/html/flights.html', {root: __dirname});
