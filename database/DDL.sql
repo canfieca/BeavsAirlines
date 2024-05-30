@@ -35,7 +35,7 @@ VALUES
 -- Table structure for table CrewMembers
 --
 CREATE OR REPLACE TABLE CrewMembers (
-  employeeID int(11) NOT NULL UNIQUE,
+  employeeID int(11) NOT NULL UNIQUE AUTO_INCREMENT,
   firstName varchar(50) NOT NULL,
   lastName varchar(50) NOT NULL,
   salary int(11) NOT NULL,

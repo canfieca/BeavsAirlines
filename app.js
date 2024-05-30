@@ -10,6 +10,10 @@
 ---------------------------------------------*/
 
 
+/*
+	TODO: move these functions into their own file in helpers folder
+*/
+
 function make_insert_query(table, data) {
 
 	var query = "INSERT INTO ";
@@ -25,6 +29,10 @@ function make_insert_query(table, data) {
 	else if (table === 'passengers') {
 		query += `Passengers (firstName, lastName) `;
 		query += `VALUES ( '${data.firstName}', '${data.lastName}' );`;
+	}
+	else if (table === 'crew') {
+		query += `CrewMembers (firstName, lastName, salary, yearsExperience, role, homebaseAirportID) `;
+		query += `VALUES ( '${data.firstName}', '${data.lastName}', ${data.salary}, ${data.yrsExp}, '${data.role}', ${data.homebaseAirportID} );`;
 	}
 
 	return query;
@@ -49,6 +57,11 @@ function make_update_query(table, data) {
 		query += `SET firstName = '${data.firstName}', lastName = '${data.lastName}' `;
 		query += `WHERE passengerID = ${data.id};`;
 	}
+	else if (table === 'crew') {
+		query += `CrewMembers `;
+		query += `SET firstName = '${data.firstName}', lastName = '${data.lastName}', salary = ${data.salary}, yearsExperience = ${data.yrsExp}, role = '${data.role}', homebaseAirportID = ${data.homebaseAirportID} `;
+		query += `WHERE employeeID = ${data.employeeID};`;
+	}
 
 	return query;
 }
@@ -68,6 +81,10 @@ function make_delete_query(table, data) {
 	else if (table === 'passengers') {
 		query += `Passengers `;
 		query += `WHERE passengerID = ${data.id};`;
+	}
+	else if (table === 'crew') {
+		query += `CrewMembers `;
+		query += `WHERE employeeID = ${data.id};`;
 	}
 
 	return query;
