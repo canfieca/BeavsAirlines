@@ -307,7 +307,7 @@ function generate_remaining_airports_html(all_airportIDs) {
 	})
 
 	html +=    `</select>
-				<button onclick="delete_airport_record()">Delete</button>
+				<button type="button" onclick="delete_airport_record()">Delete</button>
 			</div>
 			</form>
 			</div>
@@ -429,7 +429,7 @@ function generate_remaining_passengers_html(all_passengerIDs) {
 	})
 
 	html += `</select>
-				<button onclick="delete_passenger_record()">Delete</button>
+				<button type="button" onclick="delete_passenger_record()">Delete</button>
 			</div>
 			</form>
 			</div>
