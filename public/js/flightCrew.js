@@ -54,7 +54,6 @@ function update_flightcrew_record() {
     })
 }
 
-
 function delete_crew_member() {
 
     // Get the values entered by the user

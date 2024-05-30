@@ -10,33 +10,52 @@
 ---------------------------------------------*/
 
 
-function make_flight_crew_insert_query(record_info) {
-	var query = "INSERT INTO FlightCrew (flightID, employeeID) VALUES (";
-	query += record_info.flightID + ", " + record_info.employeeID + ");";
+function make_insert_query(table, data) {
+
+	var query = "INSERT INTO ";
+
+	if (table === 'flightcrew') {
+		query += `FlightCrew (flightID, employeeID) `;
+		query += `VALUES ( ${data.flightID}, ${data.employeeID} );`;
+	}
+	else if (table === 'airports') {
+		query += `Airports (name, city, numFlights, numGates) `;
+		query += `VALUES ( '${data.name}', '${data.city}', ${data.numFlights}, ${data.numGates} );`;
+	}
 
 	return query;
 }
 
-function make_flight_crew_update_query(record_info) {
-	var query = "UPDATE FlightCrew SET flightID = ";
-	query += record_info.new_flightID;
-	query += ", employeeID = ";
-	query += record_info.new_employeeID;
-	query += " WHERE flightID = ";
-	query += record_info.flightID;
-	query += " AND employeeID = ";
-	query += record_info.employeeID;
+function make_update_query(table, data) {
+
+	var query = `UPDATE `;
+
+	if (table === 'flightcrew') {
+		query += `FlightCrew `;
+		query += `SET flightID = ${data.new_flightID}, employeeID = ${data.new_employeeID} `;
+		query += `WHERE flightID = ${data.flightID} AND employeeID = ${data.employeeID};`;
+	}
+	else if (table === 'airports') {
+		query += `Airports `;
+		query += `SET name = '${data.name}', city = '${data.city}', numFlights = ${data.numFlights}, numGates = ${data.numGates} `;
+		query += `WHERE airportID = ${data.id};`;
+	}
 
 	return query;
 }
 
-// TODO: modularize this function !!
-function make_flight_crew_delete_query(record_info) {
-	var query = "DELETE FROM FlightCrew WHERE flightID = ";
-	query += record_info.flightID;
-	query += " AND employeeID = ";
-	query += record_info.employeeID;
-	query += ";";
+function make_delete_query(table, data) {
+
+	var query = `DELETE FROM `;
+
+	if (table === 'flightcrew') {
+		query += `FlightCrew `;
+		query += `WHERE flightID = ${data.flightID} AND employeeID = ${data.employeeID};`;
+	}
+	else if (table === 'airports') {
+		query += `Airports `;
+		query += `WHERE airportID = ${data.id};`;
+	}
 
 	return query;
 }
@@ -107,9 +126,12 @@ app.get('/:file', function(req, res) {
 })
 
 app.post('/add/:table', function(req, res) {
-	var data = "";
+
+	// get which entity is being added to
+	var table = req.params.table;
 
 	// get data from request body
+	var data = "";
 	req.on("data", chunk => {
 		data += chunk;
 	});
@@ -119,7 +141,9 @@ app.post('/add/:table', function(req, res) {
 		// convert string into JSON object
 		var record_info = JSON.parse(data);
 
-		var query = make_flight_crew_insert_query(record_info);
+		var query = make_insert_query(table, record_info);
+
+		console.log(query)
 
 		// add record to DB
 		db.pool.query(query, function(err, results, fields) {
@@ -132,9 +156,12 @@ app.post('/add/:table', function(req, res) {
 })
 
 app.post('/update/:table', function(req, res) {
-	var data = "";
+
+	// get which entity is being added to
+	var table = req.params.table;
 
 	// get data from request body
+	var data = "";
 	req.on("data", chunk => {
 		data += chunk;
 	});
@@ -144,7 +171,7 @@ app.post('/update/:table', function(req, res) {
 		// convert string into JSON object
 		var record_info = JSON.parse(data);
 
-		var query = make_flight_crew_update_query(record_info);
+		var query = make_update_query(table, record_info);
 
 		console.log(query)
 
@@ -159,10 +186,12 @@ app.post('/update/:table', function(req, res) {
 })
 
 app.delete('/delete/:table', function(req, res) {
+
+	// get which entity is being added to
 	var table = req.params.table;
-	var data = "";
 
 	// get data from request body
+	var data = "";
 	req.on("data", chunk => {
 		data += chunk;
 	});
@@ -172,7 +201,9 @@ app.delete('/delete/:table', function(req, res) {
 		// convert string into JSON object
 		var record_info = JSON.parse(data);
 
-		var query = make_flight_crew_delete_query(record_info);
+		var query = make_delete_query(table, record_info);
+
+		console.log(query)
 
 		// delete record from DB
 		db.pool.query(query);

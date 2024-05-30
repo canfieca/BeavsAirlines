@@ -244,21 +244,21 @@ function generate_remaining_airports_html(all_airportIDs) {
 							<h1>Add a Airport</h1>
 							<div>
 								<label for='name'>Enter the name of the airport:</label>
-								<input name='name'></input>
+								<input name='name' id="add-airport-name"></input>
 							</div>
 							<div>
 								<label for='city'>Enter the city the airport is located:</label>
-								<input name='city'></input>
+								<input name='city' id="add-airport-city"></input>
 							</div>
 							<div>
 							<label for='numOfFlights'>Add the number of flights it has:</label>
-							<input name='numOfFlights'></input>
+							<input name='numOfFlights' id="add-airport-numFlights"></input>
 							</div>
 							<div>
 								<label for='numOfGates'>Add the number of gates it has:</label>
-								<input name='numOfGates'></input>
+								<input name='numOfGates' id="add-airport-numGates"></input>
 							</div>
-							<button type="button">Add</button>
+							<button type="button" onclick="add_airport_record()">Add</button>
 						</form>`;
 	
 	// update form
@@ -267,7 +267,7 @@ function generate_remaining_airports_html(all_airportIDs) {
 			
 			<div>
 				<label for='pickAirport'>Pick an airport to modify</label>
-				<select name='pickAirport'>`;
+				<select name='pickAirport' id="update-airport-id">`;
 		
 	all_airportIDs.forEach( (id) => {
 		html += `<option value='${id}'>${id}</option>`;
@@ -276,19 +276,23 @@ function generate_remaining_airports_html(all_airportIDs) {
 	html +=    `</select>
 				</div>
 				<div>
-					<label for='city'>Update the city of the airport</label>
-					<input name='city'></input>
-				</div>
-				<div>
-					<label for='numOfFlights'>Update the number of flights it has:</label>
-					<input name='numOfFlights'></input>
-				</div>
-				<div>
-					<label for='numOfGates'>Update the number of gates it has:</label>
-					<input name='numOfGates'></input>
-				</div>
+                  <label for="name">Update the name of the airport</label>
+                  <input name="name" id="update-airport-name"></input>
+                </div>
+                <div>
+                    <label for='city'>Update the city of the airport</label>
+                    <input name='city' id="update-airport-city"></input>
+                </div>
+                <div>
+                    <label for='numOfFlights'>Update the number of flights it has:</label>
+                    <input name='numOfFlights' id="update-airport-numFlights"></input>
+                </div>
+                <div>
+                    <label for='numOfGates'>Update the number of gates it has:</label>
+                    <input name='numOfGates' id="update-airport-numGates"></input>
+                </div>
 
-				<button type="button">Update</button>
+                <button type="button" onclick="update_airport_record()">Update</button>
 			</form>`;
 
 	// delete form
@@ -296,14 +300,14 @@ function generate_remaining_airports_html(all_airportIDs) {
 			<h1>Delete an Airport</h1>
 			<div>
 				<label for='pickAirport'>Pick an airport to delete from the list</label>
-				<select name='pickAirport'>`;
+				<select name='pickAirport' id="delete-airport-id">`;
 	
 	all_airportIDs.forEach( (id) => {
 		html += `<option value='${id}'>${id}</option>`;
 	})
 
 	html +=    `</select>
-				<button>Delete</button>
+				<button onclick="delete_airport_record()">Delete</button>
 			</div>
 			</form>
 			</div>
