@@ -318,7 +318,130 @@ function generate_remaining_airports_html(all_airportIDs) {
 	return html;
 }
 
+function generate_passengers_page(db, res) {
+	var passengers_html =  `<!DOCTYPE html>
+							<html lang="en">
+							<head>
+								<meta charset="UTF-8">
+								<meta name="viewport" content="width=device-width, initial-scale=1.0">
+								<meta http-equiv="X-UA-Compatible" content="ie=edge">
+								<title>Beavs Airlines</title>
+								<link rel="stylesheet" href="/style.css">
+								<script src="passengers.js"></script>
+							</head>
+							<body>
+								<nav class='navbar'>
+								<a href='index.html'>Go Beavs!</a>
+								<ul class='navlist'>
+									<!-- <li><a href='flightCrew.html'>Flight Crew</a><li>
+									<li><a href='flightPassenger.html'>Flight Passengers</a></li> -->
+									<li><a href='airports.html'>Airports</a></li>
+									<li><a href=passengers.html>Passengers</a></li>
+									<li><a href='crew.html'>Crew Members</a></li>
+									<li><a href='flights.html'>Flights</a></li>
+								</ul>
+							</nav>
+								<table>
+									<tr>
+										<th>passengerID</th>
+										<th>First Name</th>
+										<th>Last Name</th>
+									</tr>`;
+
+	const select_query = `SELECT * FROM Passengers;`;
+
+	var all_passengerIDs = [];
+
+	// get the data for this entity from DB
+	db.pool.query(select_query, function(err, results, fields) {
+
+		// loop through each record returned from SELECT query
+		results.forEach( (record) => {
+
+			// add passengerID to array of passengerIDs
+			all_passengerIDs.push(record.passengerID);
+
+			// generate HTML
+			var tr_element =   `<tr>
+									<td>${record.passengerID}</td>
+									<td>${record.firstName}</td>
+									<td>${record.lastName}</td>
+								</tr>`;
+
+			passengers_html += tr_element;
+		})
+
+		passengers_html += generate_remaining_passengers_html(all_passengerIDs);
+		res.status(200).send(passengers_html);
+	})
+}
+
+function generate_remaining_passengers_html(all_passengerIDs) {
+	var html = `</table>
+				<section class='crud'>
+				<div class='options'>
+					<form class='create'>
+						<h1>Add a Passenger</h1>
+						<div>
+							<label for='firstName'>Enter the first name of the passenger:</label>
+							<input name='firstName' id="add-passenger-firstName"></input>
+						</div>
+						<div>
+							<label for='lastName'>Enter the last name of the passenger:</label>
+							<input name='lastName' id="add-passenger-lastName"></input>
+						</div>
+						<button type="button" onclick="add_passenger_record()">Add</button>
+					</form>`;
+
+	// update form
+	html +=    `<form class='update'>
+				<h1>Update a Passenger</h1>
+				<div>
+					<label for='pickPassenger'>Pick a passenger to modify</label>
+					<select name='pickPassenger' id="update-passenger-id">`;
+
+	all_passengerIDs.forEach( (id) => {
+		html += `<option value='${id}'>${id}</option>`;
+	})
+
+	html += 		`</select>
+				</div>
+				<div>
+					<label for='firstName'>Update their first name</label>
+					<input name='firstName' id="update-passenger-firstName"></input>
+				</div>
+				<div>
+					<label for='lastName'>Update their last name:</label>
+					<input name='lastName' id="update-passenger-lastName"></input>
+				</div>
+				<button type="button" onclick="update_passenger_record()">Update</button>
+			</form>`;
+
+	// delete form
+	html +=    `<form class='delete'>
+				<h1>Delete a Passenger</h1>
+				<div>
+					<label for='deleteFlight'>Please pick which passenger that you would like to remove</label>
+					<select name='deleteFlight' id="delete-passenger-id">`;
+
+	all_passengerIDs.forEach( (id) => {
+		html += `<option value='${id}'>${id}</option>`;
+	})
+
+	html += `</select>
+				<button onclick="delete_passenger_record()">Delete</button>
+			</div>
+			</form>
+			</div>
+			</section>
+			</body>
+			</html>`;
+
+	return html;
+}
+
 module.exports = {
 	generate_flight_crew_page,
-	generate_airports_page
+	generate_airports_page,
+	generate_passengers_page
 };

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Beavs Airlines</title>
     <link rel="stylesheet" href="/style.css">
-    <script src="index.js"></script>
+    <script src="passengers.js"></script>
   </head>
   <body>
 
@@ -66,19 +66,19 @@
                 <h1>Add a Passenger</h1>
                 <div>
                     <label for='firstName'>Enter the first name of the passenger:</label>
-                    <input name='firstName'></input>
+                    <input name='firstName' id="add-passenger-firstName"></input>
                 </div>
                 <div>
                     <label for='lastName'>Enter the last name of the passenger:</label>
-                    <input name='lastName'></input>
+                    <input name='lastName' id="add-passenger-lastName"></input>
                 </div>
-                <button type="submit">Add</button>
+                <button type="button" onclick="add_passenger_record()">Add</button>
             </form>
             <form class='update'>
                 <h1>Update a Passenger</h1>
                 <div>
                     <label for='pickPassenger'>Pick a passenger to modify</label>
-                    <select name='pickPassenger'>
+                    <select name='pickPassenger' id="update-passenger-id">
                         <option value='1'>1</option>
                         <option value='2'>2</option>
                         <option value='3'>3</option>
@@ -89,19 +89,19 @@
                 </div>
                 <div>
                     <label for='firstName'>Update their first name</label>
-                    <input name='firstName'></input>
+                    <input name='firstName' id="update-passenger-firstName"></input>
                 </div>
                 <div>
                     <label for='lastName'>Update their last name:</label>
-                    <input name='lastName'></input>
+                    <input name='lastName' id="update-passenger-lastName"></input>
                 </div>
-                <button type="submit">Update</button>
+                <button type="button" onclick="update_passenger_record()">Update</button>
             </form>
             <form class='delete'>
                 <h1>Delete a Passenger</h1>
                 <div>
                     <label for='deleteFlight'>Please pick which passenger that you would like to remove</label>
-                    <select name='deleteFlight'>
+                    <select name='deleteFlight' id="delete-passenger-id">
                         <option value='1'>1</option>
                         <option value='2'>2</option>
                         <option value='3'>3</option>
@@ -109,7 +109,7 @@
                         <option value='5'>5</option>
                         <option value='6'>6</option>
                     </select>
-                    <button>Delete</button>
+                    <button onclick="delete_passenger_record()">Delete</button>
                 </div>
             </form>
         </div>

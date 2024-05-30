@@ -113,7 +113,7 @@ app.get('/:file', function(req, res) {
 		res.status(200).sendFile('public/html/flights.html', {root: __dirname});
 	
 	else if (file === 'passengers.html') 
-		res.status(200).sendFile('public/html/passengers.html', {root: __dirname});
+		render.generate_passengers_page(db, res);
 	
 	else if (file === 'flightCrew.html') 
 		render.generate_flight_crew_page(db, res);
@@ -185,6 +185,11 @@ app.post('/update/:table', function(req, res) {
 	res.status(200).send("Success");
 })
 
+
+/*
+	TODO: for deletions from normal entities, remember to
+	      also delete those records from intersection tables
+*/
 app.delete('/delete/:table', function(req, res) {
 
 	// get which entity is being added to
