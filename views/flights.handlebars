@@ -1,0 +1,114 @@
+<script src="flights.js"></script>
+
+<p style="margin-left: 25px;">Click on a flightID to view passengers on flights (intersection tables)</p>
+
+<table>
+
+    <tr>
+        <th>flightID</th>
+        <th>numCrew</th>
+        <th>numPassengers</th>
+        <th>srcAirport</th>
+        <th>destAirport</th>
+    </tr>
+
+    {{#each flights_data}}
+        {{> flight_record}}
+    {{/each}}
+
+</table>
+
+<section class='crud'>
+    <div class='options'>
+        <form class='create'>
+            <h1>Add a Flight</h1>
+            <div>
+                <label for='crewSize'>Enter the number of crew on the flight</label>
+                <input name='crewSize' id="add-flight-numCrew"></input>
+            </div>
+            <div>
+                <label for='passengerSize'>Enter the number of passengers on the flight</label>
+                <input name='passengerSize' id="add-flight-numPassengers"></input>
+            </div>
+            <div>
+                <label for='srcAirId'>What airport is this flight originating from</label>
+                <select name='srcAirId' id="add-flight-srcAirportID">
+                    
+                    {{#each airports_data}}
+                        <option value="{{airportID}}">{{name}}</option>
+                    {{/each}}
+
+                </select>
+            </div>
+            <div>
+                <label name='destAirId'>What airport is this flight traveling to</label>
+                <select name='destAirId' id="add-flight-destAirportID">
+                    
+                    {{#each airports_data}}
+                        <option value="{{airportID}}">{{name}}</option>
+                    {{/each}}
+
+                </select>
+            </div>
+            <button type="button" onclick="add_flight_record()">Add</button>
+        </form>
+
+        <form class='update'>
+            <h1>Update a Flight</h1>
+            <div>
+                <label for='updatePickFlight'>Please pick which flight you would like to update</label>
+                <select name='updatePickFlight' id="update-flight-id">
+                    
+                    {{#each flights_data}}
+                        <option value="{{flightID}}">{{flightID}}</option>
+                    {{/each}}
+
+                </select>
+            </div>
+            <div>
+                <label for='updateCrewSize'>Update the number of crew on the flight</label>
+                <input name='updateCrewSize' id="update-flight-numCrew"></input>
+            </div>
+            <div>
+                <label for='updatePassengerSize'>Update the number of passengers on the flight</label>
+                <input name='updatePassengerSize' id="update-flight-numPassengers"></input>
+            </div>
+            <div>
+                <label for='updateSrcAirId'>Update the airport in which this flight is originating from</label>
+                <select name='updateSrcAirId' id="update-flight-srcAirportID">
+                    
+                    {{#each airports_data}}
+                        <option value="{{airportID}}">{{name}}</option>
+                    {{/each}}
+
+                </select>
+            </div>
+            <div>
+                <label name='updateDestAirId'>What airport is this flight traveling to</label>
+                <select name='updateDestAirId' id="update-flight-destAirportID">
+                    
+                    {{#each airports_data}}
+                        <option value="{{airportID}}">{{name}}</option>
+                    {{/each}}
+
+                </select>
+            </div>
+            <button type="button" onclick="update_flight_record()">Update</button>
+        </form>
+
+        <form class='delete'>
+            <h1>Delete the Flight</h1>
+            <div>
+                <label for='deleteFlight'>Please pick which flight that you would like to remove</label>
+                <select name='deleteFlight' id="delete-flight-id">
+                    
+                    {{#each flights_data}}
+                        <option value="{{flightID}}">{{flightID}}</option>
+                    {{/each}}
+
+                </select>
+            </div>
+            <button type="button" onclick="delete_flight_record()">Delete</button>
+        </form>
+    </div>
+</section>
