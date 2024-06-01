@@ -102,17 +102,12 @@ const port = 43043;  // set a port number for server to listen on
 app.engine('handlebars', exphbs.engine({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
 
-const os = require('os')
-console.log("Hostname: http://" + os.hostname() + ":" + JSON.stringify(port));
-
 // Connect to database
 var db = require('./helpers/db_connector');
 
-// import js file for html rendering
-var render = require('./helpers/html_rendering');
+const os = require('os')
+console.log("Hostname: http://" + os.hostname() + ":" + JSON.stringify(port));
 
-
-//app.use(express.static('static')) // DO I NEED THIS?
 
 // Information logger function
 app.use(function (req, res, next) {
@@ -125,9 +120,13 @@ app.use(function (req, res, next) {
 
 // Routing functions
 app.get('/', function(req, res) {
-    res.status(200).sendFile('public/html/index.html', {root: __dirname});
+    res.status(200).render('homepage');
 });
 
+/*
+	TODO: move all code within the conditional blocks into their own
+	      functions for better readability
+*/
 app.get('/:file', function(req, res) {
 	var file = req.params.file;
 
@@ -153,8 +152,22 @@ app.get('/:file', function(req, res) {
 		})
 	}
 	
-	else if (file === 'crew.html') 
-		render.generate_crew_members_page(db, res);
+	else if (file === 'crew.html') {
+
+		// construct DB query
+		var query = 'SELECT CrewMembers.employeeID, CrewMembers.firstName, CrewMembers.lastName, CrewMembers.salary, ';
+		query +=           'CrewMembers.yearsExperience, CrewMembers.role, Airports.name AS homebaseAirport ';
+		query +=    'FROM CrewMembers '
+		query +=    'INNER JOIN Airports ON CrewMembers.homebaseAirportID = Airports.airportID;';
+
+		// get crew member data from DB
+		db.pool.query(query, function(err, results, fields) {
+
+			res.status(200).render('crew', {
+				crew_data: results
+			})
+		})
+	}
 	
 	else if (file === 'flights.html') 
 		res.status(200).sendFile('public/html/flights.html', {root: __dirname});
@@ -171,7 +184,7 @@ app.get('/:file', function(req, res) {
 	}
 	
 	else if (file === 'flightCrew.html') 
-		render.generate_flight_crew_page(db, res);
+		res.status(200).send("not implemented yet");
 	
 	else if (file === 'flightPassenger.html') 
 		res.status(200).sendFile('public/html/flightPassenger.html', {root: __dirname});

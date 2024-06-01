@@ -1,0 +1,117 @@
+<script src="crew.js"></script>
+
+<table style="width: 100%;">
+    <tr>
+        <th>employeeID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Salary</th>
+        <th>Years of Experience</th>
+        <th>Role</th>
+        <th>Homebase Airport</th>
+    </tr>
+
+    {{#each crew_data}}
+        {{> crew_record}}
+    {{/each}}
+
+</table>
+
+<section class='crud'>
+    <div class='options'>
+        <form class='create'>
+            <h1>Add an Employee</h1>
+            <div>
+                <label for='firstName'>Enter the first name of the employee:</label>
+                <input name='firstName' id="add-crew-member-firstName"></input>
+            </div>
+            <div>
+                <label for='lastName'>Enter the last name of the employee:</label>
+                <input name='lastName' id="add-crew-member-lastName"></input>
+            </div>
+            <div>
+                <label for='salary'>Enter employee's salary:</label>
+                <input name='salary' id="add-crew-member-salary"></input>
+            </div>
+            <div>
+                <label for='yearsExpr'>Enter how many years experience the employee has:</label>
+                <input name='yearsExpr' id="add-crew-member-yrsExp"></input>
+            </div>
+            <div>
+                <label for='role'>What's the employee's role:</label>
+                <input name='role' id="add-crew-member-role"></input>    
+            </div>
+            <div>
+                <label for='homeAirId'>What airport is their home location</label>
+                <select name='homeAirId' id="add-crew-member-airportID">
+
+                    {{#each crew_data}}
+                        <option value='{{homebaseAirport}}'>{{homebaseAirport}}</option>
+                    {{/each}}
+
+                </select>
+            </div>
+            <button type="button" onclick="add_crew_member_record()">Add</button>
+        </form>
+
+        <form class='update'>
+            <h1>Update an Employee</h1>
+            <div>
+                <label for='pickFlight'>Pick an employee to modify</label>
+                <select name='pickFlight' id="update-crew-member-employeeID">
+
+                    {{#each crew_data}}
+                        <option value='{{employeeID}}'>{{employeeID}}</option>
+                    {{/each}}
+
+                </select>
+            </div>
+            <div>
+                <label for='firstName'>Enter the first name of the employee:</label>
+                <input name='firstName' id="update-crew-member-firstName"></input>
+            </div>
+            <div>
+                <label for='lastName'>Enter the last name of the employee:</label>
+                <input name='lastName' id="update-crew-member-lastName"></input>
+            </div>
+            <div>
+                <label for='salary'>Update their salary:</label>
+                <input name='salary' id="update-crew-member-salary"></input>
+            </div>
+            <div>
+                <label for='yearsExpr'>Update their years of experience:</label>
+                <input name='yearsExpr' id="update-crew-member-yrsExp"></input>
+            </div>
+            <div>
+                <label for='role'>Update their role:</label>
+                <input name='role' id="update-crew-member-role"></input>    
+            </div>
+            <div>
+                <label for='homeAirId'>Update their home airport:</label>
+                <select name='homeAirId' id="update-crew-member-airportID">
+
+                    {{#each crew_data}}
+                        <option value='{{homebaseAirport}}'>{{homebaseAirport}}</option>
+                    {{/each}}
+
+                </select>
+            </div>
+            <button type="button" onclick="update_crew_member_record()">Update</button>
+        </form>
+
+        <form class='delete'>
+            <h1>Delete an Employee</h1>
+            <div>
+                <label for='deleteFlight'>Please pick which crew member that you would like to remove</label>
+                <select name='deleteFlight' id="delete-crew-member-id">
+
+                    {{#each crew_data}}
+                        <option value='{{employeeID}}'>{{employeeID}}</option>
+                    {{/each}}
+
+                </select>
+                <button type="button" onclick="delete_crew_member_record()">Delete</button>
+            </div>
+        </form>
+    </div>
+</section>
