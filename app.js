@@ -92,12 +92,18 @@ function make_delete_query(table, data) {
 
 
 // Express
-var express = require('express'); // include express library for web server
-var app = express();              // instantiate express object
-PORT = 43043;                     // set a port number for server to listen on
+var express = require('express'); 			// include express library for web server
+var exphbs = require('express-handlebars'); // use handlebars templating engine
+
+var app = express(); // instantiate express object
+const port = 43043;  // set a port number for server to listen on
+
+// setting up handlebars
+app.engine('handlebars', exphbs.engine({defaultLayout: 'main'}))
+app.set('view engine', 'handlebars')
 
 const os = require('os')
-console.log("Hostname: http://" + os.hostname() + ":" + JSON.stringify(PORT));
+console.log("Hostname: http://" + os.hostname() + ":" + JSON.stringify(port));
 
 // Connect to database
 var db = require('./helpers/db_connector');
@@ -105,6 +111,8 @@ var db = require('./helpers/db_connector');
 // import js file for html rendering
 var render = require('./helpers/html_rendering');
 
+
+//app.use(express.static('static')) // DO I NEED THIS?
 
 // Information logger function
 app.use(function (req, res, next) {
@@ -124,7 +132,7 @@ app.get('/:file', function(req, res) {
 	var file = req.params.file;
 
 	if (file === 'index.html') 
-		res.status(200).sendFile('public/html/index.html', {root: __dirname});
+		res.status(200).render('homepage');
 
 	else if (file === 'style.css') 
 		res.status(200).sendFile('public/css/style.css', {root: __dirname});
@@ -133,8 +141,19 @@ app.get('/:file', function(req, res) {
 	else if (file.slice(-3) === '.js')
 		res.status(200).sendFile('/public/js/' + file, {root: __dirname});
 	
-	else if (file === 'airports.html') 
-		render.generate_airports_page(db, res);
+	else if (file === 'airports.html') {
+
+		// get airport data from DB
+		db.pool.query('SELECT * FROM Airports', function(err, results, fields) {
+
+			// use handlebars to dynamically generate the page and send it to client
+			res.status(200).render('airports', {
+				airports_data: results
+			})
+		})
+
+		console.log("airports page sent!")
+	}
 	
 	else if (file === 'crew.html') 
 		render.generate_crew_members_page(db, res);
@@ -249,4 +268,4 @@ app.delete('/delete/:table', function(req, res) {
 });
 
 // Listener
-app.listen(PORT);
+app.listen(port);

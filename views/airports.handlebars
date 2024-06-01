@@ -10,7 +10,7 @@
             <th>Number of Gates</th>
         </tr>
 
-        {{#each records}}
+        {{#each airports_data}}
             {{> airport_record}}
         {{/each}}
 
@@ -46,8 +46,8 @@
 				<label for='pickAirport'>Pick an airport to modify</label>
 				<select name='pickAirport' id="update-airport-id">
 
-                    {{#each all_airportIDs}}
-                        {{> airport_option}}
+                    {{#each airports_data}}
+                        <option value='{{airportID}}'>{{airportID}}</option>
                     {{/each}}
 
                 </select>
@@ -78,8 +78,8 @@
 				<label for='pickAirport'>Pick an airport to delete from the list</label>
 				<select name='pickAirport' id="delete-airport-id">
 
-                    {{#each all_airportIDs}}
-                        {{> airport_option}}
+                    {{#each airports_data}}
+                        <option value='{{airportID}}'>{{airportID}}</option>
                     {{/each}}
 
                 </select>
