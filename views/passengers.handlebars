@@ -1,0 +1,69 @@
+<script src="passengers.js"></script>
+
+<table>
+    <tr>
+        <th>passengerID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+    </tr>
+
+    {{#each passengers_data}}
+        {{> passenger_record}}
+    {{/each}}
+
+</table>
+
+<section class='crud'>
+    <div class='options'>
+        <form class='create'>
+            <h1>Add a Passenger</h1>
+            <div>
+                <label for='firstName'>Enter the first name of the passenger:</label>
+                <input name='firstName' id="add-passenger-firstName"></input>
+            </div>
+            <div>
+                <label for='lastName'>Enter the last name of the passenger:</label>
+                <input name='lastName' id="add-passenger-lastName"></input>
+            </div>
+            <button type="button" onclick="add_passenger_record()">Add</button>
+        </form>
+
+        <form class='update'>
+            <h1>Update a Passenger</h1>
+            <div>
+                <label for='pickPassenger'>Pick a passenger to modify</label>
+                <select name='pickPassenger' id="update-passenger-id">
+
+                    {{#each passengers_data}}
+                        <option value='{{passengerID}}'>{{passengerID}}</option>
+                    {{/each}}
+
+                </select>
+            </div>
+            <div>
+                <label for='firstName'>Update their first name</label>
+                <input name='firstName' id="update-passenger-firstName"></input>
+            </div>
+            <div>
+                <label for='lastName'>Update their last name:</label>
+                <input name='lastName' id="update-passenger-lastName"></input>
+            </div>
+            <button type="button" onclick="update_passenger_record()">Update</button>
+        </form>
+
+        <form class='delete'>
+            <h1>Delete a Passenger</h1>
+            <div>
+                <label for='deleteFlight'>Please pick which passenger that you would like to remove</label>
+                <select name='deleteFlight' id="delete-passenger-id">
+
+                    {{#each passengers_data}}
+                        <option value='{{passengerID}}'>{{passengerID}}</option>
+                    {{/each}}
+
+                </select>
+				<button type="button" onclick="delete_passenger_record()">Delete</button>
+			</div>
+        </form>
+    </div>
+</section>

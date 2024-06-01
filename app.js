@@ -144,15 +144,13 @@ app.get('/:file', function(req, res) {
 	else if (file === 'airports.html') {
 
 		// get airport data from DB
-		db.pool.query('SELECT * FROM Airports', function(err, results, fields) {
+		db.pool.query('SELECT * FROM Airports;', function(err, results, fields) {
 
 			// use handlebars to dynamically generate the page and send it to client
 			res.status(200).render('airports', {
 				airports_data: results
 			})
 		})
-
-		console.log("airports page sent!")
 	}
 	
 	else if (file === 'crew.html') 
@@ -161,8 +159,16 @@ app.get('/:file', function(req, res) {
 	else if (file === 'flights.html') 
 		res.status(200).sendFile('public/html/flights.html', {root: __dirname});
 	
-	else if (file === 'passengers.html') 
-		render.generate_passengers_page(db, res);
+	else if (file === 'passengers.html') {
+
+		// get passenger data from DB
+		db.pool.query('SELECT * FROM Passengers;', function(err, results, fields) {
+
+			res.status(200).render('passengers', {
+				passengers_data: results
+			})
+		})
+	}
 	
 	else if (file === 'flightCrew.html') 
 		render.generate_flight_crew_page(db, res);
