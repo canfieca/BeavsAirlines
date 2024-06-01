@@ -1,0 +1,70 @@
+<script src="/flightcrew.js"></script>
+
+<button onclick="window.history.back()" id="back-button">Click here to go back</button>
+
+<h1 style="margin-left: 50vw; transform: translateX(-25%);">Flight Crew Members</h1>
+
+<table>
+    <tr>
+        <th>flightID</th>
+        <th>employeeID</th>
+        <th>Flight</th>
+        <th>CrewMember Name</th>
+    </tr>
+
+    {{#each flightcrew_data}}
+        {{> flightcrew_record}}
+    {{/each}}
+
+</table>
+
+<section class='crud'>
+    <div class='options'>
+        <form class='create'>
+            <h1>Add a Flight Crew Member</h1>
+            <div>
+                <label for='flightID'>Pick flight to add</label>
+                <select name='flightID' id="add-flightcrew-flightID">
+
+                    {{#each flights_data}}
+                        <option value="{{flightID}}">{{flightID}}: {{srcAirport}} -> {{destAirport}}</option>
+                    {{/each}}
+
+                </select>
+            </div>
+            <div>
+                <label for='passengerID'>Pick crew member to add</label>
+                <select name='passengerID' id="add-flightcrew-employeeID">
+
+                    {{#each crew_data}}
+                        <option value="{{employeeID}}">{{employeeID}}: {{firstName}} {{lastName}}</option>
+                    {{/each}}
+                
+                </select>
+            </div>
+            <button type="button" onclick="add_flightcrew_record()">Add</button>
+        </form>
+        
+        <form class='delete'>
+            <h1>Pick which flight and crew member you'd like to remove</h1>
+            <div>
+                <label for='deleteFlightCrew'>Please pick which flight and crew member you'd like to remove</label>
+                <select name='deleteFlightCrew' id="delete-flightcrew-flightID">
+
+                    {{#each flights_data}}
+                        <option value="{{flightID}}">{{flightID}}: {{srcAirport}} -> {{destAirport}}</option>
+                    {{/each}}
+
+                </select>
+				<select name='deleteFlightCrew' id="delete-flightcrew-employeeID">
+
+                    {{#each crew_data}}
+                        <option value="{{employeeID}}">{{employeeID}}: {{firstName}} {{lastName}}</option>
+                    {{/each}}
+
+                </select>
+            </div>
+            <button type="button" id="delete-button" onclick="delete_crew_member()">Delete</button>
+        </form>
+    </div>
+</section>

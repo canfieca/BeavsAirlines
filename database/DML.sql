@@ -66,10 +66,13 @@ JOIN Airports a2 ON f.destAirportID = a2.airportID;
 SELECT * FROM Airports;
 
 -- FlightCrew:
-SELECT FlightCrew.flightID, FlightCrew.employeeID, CrewMembers.firstName, CrewMembers.lastName
-FROM FlightCrew
-INNER JOIN CrewMembers ON FlightCrew.employeeID = CrewMembers.employeeID
-ORDER BY FlightCrew.flightID ASC;
+SELECT fc.flightID, fc.employeeID, a1.name AS srcAirport, a2.name AS destAirport, c.firstName, c.lastName
+FROM FlightCrew fc
+JOIN CrewMembers c ON fc.employeeID = c.employeeID
+JOIN Flights f ON fc.flightID = f.flightID
+JOIN Airports a1 ON f.srcAirportID = a1.airportID
+JOIN Airports a2 ON f.destAirportID = a2.airportID
+ORDER BY fc.flightID ASC;
 
 -- FlightPassengers:
 SELECT FlightPassengers.flightID, Passengers.firstName, Passengers.lastName,
