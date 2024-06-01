@@ -54,7 +54,7 @@ function update_flight_record() {
 function delete_flight_record() {
 
     const data = {
-        flightID: document.getElementById('delete-flight-id').value
+        id: document.getElementById('delete-flight-id').value
     }
 
     // send the data to app.js using fetch

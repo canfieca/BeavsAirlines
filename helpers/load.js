@@ -17,18 +17,18 @@ function send_crew_page(db, res) {
     // construct DB query
     var query = 'SELECT c.employeeID, c.firstName, c.lastName, c.salary, ';
     query +=           'c.yearsExperience, c.role, a.name AS homebaseAirport ';
-    query +=    'FROM CrewMembers c'
+    query +=    'FROM CrewMembers c ';
     query +=    'JOIN Airports a ON c.homebaseAirportID = a.airportID;';
 
     // get crew member data from DB
     db.pool.query(query, function(err, crew_results, fields) {
 
-        // get the name of all airports in DB
-        db.pool.query('SELECT name FROM Airports;', function(err, airports_results, fields) {
+        // get the IDs and names of all airports in DB
+        db.pool.query('SELECT airportID, name FROM Airports;', function(err, airports_results, fields) {
 
             res.status(200).render('crew', {
                 crew_data: crew_results,
-                all_airport_names: airports_results
+                airports_data: airports_results
             })
         })
     })

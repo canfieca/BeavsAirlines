@@ -48,8 +48,11 @@ app.get('/', function(req, res) {
 });
 
 app.get('/:file', function(req, res) {
-	var file = req.params.file;
+	const file = req.params.file;
 
+	/*
+		TODO: remove .html suffix from get requests
+	*/
 	if (file === 'index.html') 
 		res.status(200).render('homepage');
 
@@ -85,7 +88,7 @@ app.get('/:file', function(req, res) {
 app.post('/add/:table', function(req, res) {
 
 	// get which entity is being added to
-	var table = req.params.table;
+	const table = req.params.table;
 
 	// get data from request body
 	var data = "";
@@ -115,7 +118,7 @@ app.post('/add/:table', function(req, res) {
 app.post('/update/:table', function(req, res) {
 
 	// get which entity is being added to
-	var table = req.params.table;
+	const table = req.params.table;
 
 	// get data from request body
 	var data = "";
@@ -150,7 +153,7 @@ app.post('/update/:table', function(req, res) {
 app.delete('/delete/:table', function(req, res) {
 
 	// get which entity is being added to
-	var table = req.params.table;
+	const table = req.params.table;
 
 	// get data from request body
 	var data = "";
