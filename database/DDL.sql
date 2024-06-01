@@ -74,8 +74,8 @@ CREATE OR REPLACE TABLE Flights (
 --
 INSERT INTO Flights (flightID, numCrew, numPassengers, srcAirportID, destAirportID)
 VALUES
-(1, 9, 140, 1, 3),
-(2, 4, 60, 2, 2),
+(1, 9, 140, 1, 2),
+(2, 4, 60, 2, 3),
 (3, 7, 150, 3, 1);
 
 --

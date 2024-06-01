@@ -35,7 +35,7 @@
                 <select name='pickPassenger' id="update-passenger-id">
 
                     {{#each passengers_data}}
-                        <option value='{{passengerID}}'>{{passengerID}}</option>
+                        <option value='{{passengerID}}'>{{passengerID}}: {{firstName}} {{lastName}}</option>
                     {{/each}}
 
                 </select>
@@ -58,7 +58,7 @@
                 <select name='deleteFlight' id="delete-passenger-id">
 
                     {{#each passengers_data}}
-                        <option value='{{passengerID}}'>{{passengerID}}</option>
+                        <option value='{{passengerID}}'>{{passengerID}}: {{firstName}} {{lastName}}</option>
                     {{/each}}
 
                 </select>

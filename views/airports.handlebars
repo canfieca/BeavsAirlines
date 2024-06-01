@@ -47,7 +47,7 @@
 				<select name='pickAirport' id="update-airport-id">
 
                     {{#each airports_data}}
-                        <option value='{{airportID}}'>{{airportID}}</option>
+                        <option value='{{airportID}}'>{{airportID}}: {{name}}</option>
                     {{/each}}
 
                 </select>
@@ -79,7 +79,7 @@
 				<select name='pickAirport' id="delete-airport-id">
 
                     {{#each airports_data}}
-                        <option value='{{airportID}}'>{{airportID}}</option>
+                        <option value='{{airportID}}'>{{airportID}}: {{name}}</option>
                     {{/each}}
 
                 </select>

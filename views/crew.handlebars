@@ -61,7 +61,7 @@
                 <select name='pickFlight' id="update-crew-member-employeeID">
 
                     {{#each crew_data}}
-                        <option value='{{employeeID}}'>{{employeeID}}</option>
+                        <option value='{{employeeID}}'>{{employeeID}}: {{firstName}} {{lastName}}</option>
                     {{/each}}
 
                 </select>
@@ -106,7 +106,7 @@
                 <select name='deleteFlight' id="delete-crew-member-id">
 
                     {{#each crew_data}}
-                        <option value='{{employeeID}}'>{{employeeID}}</option>
+                        <option value='{{employeeID}}'>{{employeeID}}: {{firstName}} {{lastName}}</option>
                     {{/each}}
 
                 </select>

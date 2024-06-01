@@ -18,7 +18,8 @@ function send_crew_page(db, res) {
     var query = 'SELECT c.employeeID, c.firstName, c.lastName, c.salary, ';
     query +=           'c.yearsExperience, c.role, a.name AS homebaseAirport ';
     query +=    'FROM CrewMembers c ';
-    query +=    'JOIN Airports a ON c.homebaseAirportID = a.airportID;';
+    query +=    'JOIN Airports a ON c.homebaseAirportID = a.airportID ';
+    query +=    'ORDER BY c.employeeID;';
 
     // get crew member data from DB
     db.pool.query(query, function(err, crew_results, fields) {
@@ -42,7 +43,8 @@ function send_flights_page(db, res) {
     query +=           'a1.name AS srcAirport, a2.name AS destAirport ';
     query +=    'FROM Flights f ';
     query +=    'JOIN Airports a1 ON f.srcAirportID = a1.airportID ';
-    query +=    'JOIN Airports a2 ON f.destAirportID = a2.airportID;';
+    query +=    'JOIN Airports a2 ON f.destAirportID = a2.airportID ';
+    query +=    'ORDER BY f.flightID;';
 
     // get flights data from DB
     db.pool.query(query, function(err, flights_results, fields) {
