@@ -45,8 +45,8 @@
                 <label for='homeAirId'>What airport is their home location</label>
                 <select name='homeAirId' id="add-crew-member-airportID">
 
-                    {{#each crew_data}}
-                        <option value='{{homebaseAirport}}'>{{homebaseAirport}}</option>
+                    {{#each all_airport_names}}
+                        <option value='{{name}}'>{{name}}</option>
                     {{/each}}
 
                 </select>
@@ -90,8 +90,8 @@
                 <label for='homeAirId'>Update their home airport:</label>
                 <select name='homeAirId' id="update-crew-member-airportID">
 
-                    {{#each crew_data}}
-                        <option value='{{homebaseAirport}}'>{{homebaseAirport}}</option>
+                    {{#each all_airport_names}}
+                        <option value='{{name}}'>{{name}}</option>
                     {{/each}}
 
                 </select>
