@@ -11,17 +11,7 @@ function add_flightpassenger_record() {
         isCheckedIn: Number( document.getElementById('add-flightpassenger-isCheckedIn').checked )
     }
 
-    // Send the data to app.js using fetch
-    fetch('/add/flightpassengers', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(res => {
-        window.location.reload();
-    })
+    send_custom_fetch_request('add', 'flightpassengers', data);
 }
 
 
@@ -36,17 +26,7 @@ function update_flightpassenger_record() {
         isCheckedIn: Number( document.getElementById('update-flightpassenger-isCheckedIn').checked )
     }
 
-    // Send the data to app.js using fetch
-    fetch('/update/flightpassengers', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(res => {
-        window.location.reload();
-    })
+    send_custom_fetch_request('update', 'flightpassengers', data);
 }
 
 
@@ -58,15 +38,5 @@ function delete_flightpassenger_record() {
         passengerID: document.getElementById('delete-flightpassenger-passengerID').value
     }
 
-    // Send the data to app.js using fetch
-    fetch('/delete/flightpassengers', {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => {
-        window.location.reload();
-    })
+    send_custom_fetch_request('delete', 'flightpassengers', data);
 }

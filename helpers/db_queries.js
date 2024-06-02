@@ -54,7 +54,7 @@ function make_update_query(table, data) {
 	else if (table === 'passengers') {
 		query += `Passengers `;
 		query += `SET firstName = '${data.firstName}', lastName = '${data.lastName}' `;
-		query += `WHERE passengerID = ${data.id};`;
+		query += `WHERE passengerID = ${data.passengerID};`;
 	}
 	else if (table === 'flightpassengers') {
 		query += `FlightPassengers `;

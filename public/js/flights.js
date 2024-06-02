@@ -13,17 +13,7 @@ function add_flight_record() {
         destAirportID: document.getElementById('add-flight-destAirportID').value
     }
 
-    // send the data to app.js using fetch
-    fetch('add/flights', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(res => {
-        window.location.reload();
-    })
+    send_custom_fetch_request('add', 'flights', data);
 }
 
 
@@ -37,17 +27,7 @@ function update_flight_record() {
         destAirportID: document.getElementById('update-flight-destAirportID').value
     }
 
-    // send the data to app.js using fetch
-    fetch('update/flights', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(res => {
-        window.location.reload();
-    })
+    send_custom_fetch_request('update', 'flights', data);
 }
 
 
@@ -57,15 +37,5 @@ function delete_flight_record() {
         id: document.getElementById('delete-flight-id').value
     }
 
-    // send the data to app.js using fetch
-    fetch('delete/flights', {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(res => {
-        window.location.reload();
-    })
+    send_custom_fetch_request('delete', 'flights', data);
 }

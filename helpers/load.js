@@ -2,6 +2,7 @@
 // import helper functions
 var help = require('./helper');
 
+
 function send_airports_page(db, res) {
 
     // get airport data from DB

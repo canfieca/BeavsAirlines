@@ -2,70 +2,33 @@
 
 function add_passenger_record() {
 
+    // get values input by user
     var data = {
-        firstName: "",
-        lastName: ""
+        firstName: document.getElementById('add-passenger-firstName').value,
+        lastName: document.getElementById('add-passenger-lastName').value
     }
 
-    // get values input by user
-    data.firstName = document.getElementById('add-passenger-firstName').value;
-    data.lastName = document.getElementById('add-passenger-lastName').value;
-
-    // send the data to app.js using fetch
-    fetch('add/passengers', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(res => {
-        window.location.reload();
-    })
+    send_custom_fetch_request('add', 'passengers', data);
 }
 
 function update_passenger_record() {
 
+    // get values input by user
     var data = {
-        id: 0,
-        new_firstName: "",
-        new_lastName: ""
+        passengerID: document.getElementById('update-passenger-id').value,
+        firstName: document.getElementById('update-passenger-firstName').value,
+        lastName: document.getElementById('update-passenger-lastName').value
     }
 
-    // get values input by user
-    data.id = document.getElementById('update-passenger-id').value;
-    data.firstName = document.getElementById('update-passenger-firstName').value;
-    data.lastName = document.getElementById('update-passenger-lastName').value;
-
-    // send the data to app.js using fetch
-    fetch('update/passengers', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(res => {
-        window.location.reload();
-    })
+    send_custom_fetch_request('update', 'passengers', data);
 }
 
 function delete_passenger_record() {
 
-    var data = { id: 0 };
-
     // get record to delete (entered by user)
-    data.id = document.getElementById('delete-passenger-id').value;
+    var data = {
+        id: document.getElementById('delete-passenger-id').value
+    }
 
-    // send the data to app.js using fetch
-    fetch('delete/passengers', {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(res => {
-        window.location.reload();
-    })
+    send_custom_fetch_request('delete', 'passengers', data);
 }

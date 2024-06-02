@@ -143,11 +143,7 @@ app.post('/update/:table', function(req, res) {
 })
 
 
-/*
-	TODO: for deletions & updates to/from normal entities, remember to
-	      also delete those records from intersection tables
-*/
-app.delete('/delete/:table', function(req, res) {
+app.post('/delete/:table', function(req, res) {
 
 	// get which entity is being added to
 	const table = req.params.table;
