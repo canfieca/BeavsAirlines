@@ -57,7 +57,37 @@ function get_distinct_crew(arr) {
 }
 
 
+function get_distinct_passengers(arr) {
+
+    var distinct_passengers = [];
+
+    // loop through all records in the array
+    arr.forEach( (record) => {
+
+        // determine if the current record's corresponding crew member has been accounted for already
+        var found = false;
+        distinct_passengers.forEach( (passenger) => {
+
+            if (record.passengerID === passenger.passengerID)
+                found = true;
+        })
+
+        // add passenger information to distinct_passengers if not already in distinct_passengers
+        if (!found) {
+            distinct_passengers.push({
+                passengerID: record.passengerID,
+                firstName: record.firstName,
+                lastName: record.lastName
+            })
+        }
+    })
+
+    return distinct_passengers;
+}
+
+
 module.exports = {
     get_distinct_flights,
-    get_distinct_crew
+    get_distinct_crew,
+    get_distinct_passengers
 }

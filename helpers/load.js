@@ -150,6 +150,14 @@ function send_flight_passenger_page(db, res) {
     // get flight passengers data from DB
     db.pool.query(fp_query, function(err, flightpassengers_results, fields) {
 
+        // make a new array of flights that doesn't contain duplicates
+        const distinct_flightpassengers_flights = help.get_distinct_flights(flightpassengers_results);
+
+        // make a new array of passengers that doesn't contain duplicates
+        const distinct_flightpassengers_passengers = help.get_distinct_passengers(flightpassengers_results);
+
+        console.log("distinct_flightpassengers_passengers:", distinct_flightpassengers_passengers);
+
         // get all flightIDs, srcAirports, and destAirports from Flights
         db.pool.query(f_query, function(err, flights_results, fields) {
 
@@ -161,6 +169,8 @@ function send_flight_passenger_page(db, res) {
                     flightpassengers_data: flightpassengers_results,
                     flights_data: flights_results,
                     passengers_data: passengers_results,
+                    distinct_fp_flights_data: distinct_flightpassengers_flights,
+                    distinct_fp_passengers_data: distinct_flightpassengers_passengers,
                     js_file: 'flightpassengers.js'
                 })
             })

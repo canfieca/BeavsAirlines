@@ -65,14 +65,14 @@
                 <label for='pickFlightPassID'>Please pick which flight and passenger you'd like to update</label>
                 <select name='pickFlightPassID' id="update-flightpassenger-flightID">
                     
-                    {{#each flightpassengers_data}}
+                    {{#each distinct_fp_flights_data}}
                         <option value="{{flightID}}">{{flightID}}: {{srcAirport}} -> {{destAirport}}</option>
                     {{/each}}
 
                 </select>
                 <select name='pickFlightPassID' id="update-flightpassenger-passengerID">
                     
-                    {{#each flightpassengers_data}}
+                    {{#each distinct_fp_passengers_data}}
                         <option value="{{passengerID}}">{{passengerID}}: {{firstName}} {{lastName}}</option>
                     {{/each}}
 
@@ -99,14 +99,14 @@
                 <label for='deleteFlightPassenger'>Please pick which flight and passenger you'd like to remove</label>
                 <select name='deleteFlightPassenger' id="delete-flightpassenger-flightID">
                     
-                    {{#each flightpassengers_data}}
+                    {{#each distinct_fp_flights_data}}
                         <option value="{{flightID}}">{{flightID}}: {{srcAirport}} -> {{destAirport}}</option>
                     {{/each}}
 
                 </select>
                 <select name='pickFlightPassID' id="delete-flightpassenger-passengerID">
                     
-                    {{#each flightpassengers_data}}
+                    {{#each distinct_fp_passengers_data}}
                         <option value="{{passengerID}}">{{passengerID}}: {{firstName}} {{lastName}}</option>
                     {{/each}}
 
