@@ -1,9 +1,5 @@
 // flights.js
 
-/*
-    TODO: modularize the fetch request into it's own function
-*/
-
 function add_flight_record() {
 
     const data = {

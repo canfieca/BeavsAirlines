@@ -1,206 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Beavs Airlines</title>
-    <link rel="stylesheet" href="/style.css">
-    <script src="crew.js"></script>
-  </head>
-  <body>
-
-    <nav class='navbar'>
-        <a href='index.html'>Go Beavs!</a>
-        <ul class='navlist'>
-            <li><a href='flightCrew.html'>Flight Crew</a><li>
-            <li><a href='flightPassenger.html'>Flight Passengers</a></li>
-            <li><a href='airports.html'>Airports</a></li>
-            <li><a href=passengers.html>Passengers</a></li>
-            <li><a href='crew.html'>Crew Members</a></li>
-            <li><a href='flights.html'>Flights</a></li>
-        </ul>
-    </nav>
-
-    <table style="width: 100%;">
-        <tr>
-            <th>employeeID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Salary</th>
-            <th>Years of Experience</th>
-            <th>Role</th>
-            <th>Homebase Airport</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>John</td>
-            <td>Cena</td>
-            <td>130,000</td>
-            <td>13</td>
-            <td>Pilot</td>
-            <td>47</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Randy</td>
-            <td>Orton</td>
-            <td>145,000</td>
-            <td>15</td>
-            <td>Chief Attendant</td>
-            <td>71</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Undertaker</td>
-            <td>--</td>
-            <td>1,000,000</td>
-            <td>30</td>
-            <td>Airport Manager</td>
-            <td>100</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Triple</td>
-            <td>H</td>
-            <td>89,000</td>
-            <td>5</td>
-            <td>Flight Attendant</td>
-            <td>56</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Shawn</td>
-            <td>Michaels</td>
-            <td>500,000</td>
-            <td>25</td>
-            <td>Flight Manager</td>
-            <td>23</td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>CM</td>
-            <td>Punk</td>
-            <td>123,000</td>
-            <td>21</td>
-            <td>Grounds Crew</td>
-            <td>12</td>
-        </tr>
-
-    </table>
-
-      <section class='crud'>
-        <div class='options'>
-            <form class='create'>
-                <h1>Add an Employee</h1>
-                <div>
-                    <label for='firstName'>Enter the first name of the employee:</label>
-                    <input name='firstName' id="add-crew-member-firstName"></input>
-                </div>
-                <div>
-                    <label for='lastName'>Enter the last name of the employee:</label>
-                    <input name='lastName' id="add-crew-member-lastName"></input>
-                </div>
-                <div>
-                    <label for='salary'>Enter employee's salary:</label>
-                    <input name='salary' id="add-crew-member-salary"></input>
-                </div>
-                <div>
-                    <label for='yearsExpr'>Enter how many years experience the employee has:</label>
-                    <input name='yearsExpr' id="add-crew-member-yrsExp"></input>
-                </div>
-                <div>
-                    <label for='role'>What's the employee's role:</label>
-                    <input name='role' id="add-crew-member-role"></input>    
-                </div>
-                <div>
-                    <label for='homeAirId'>What airport is their home location</label>
-                    <select name='homeAirId' id="add-crew-member-airportID">
-                        <option value='12'>12</option>
-                        <option value='23'>23</option>
-                        <option value='34'>34</option>
-                        <option value='45'>45</option>
-                        <option value='47'>47</option>
-                        <option value='56'>56</option>
-                        <option value='65'>65</option>
-                        <option value='67'>67</option>
-                        <option value='71'>71</option>
-                        <option value='78'>78</option>
-                        <option value='89'>89</option>
-                        <option value='100'>100</option>
-                    </select>
-                </div>
-                <button type="button" onclick="add_crew_member_record()">Add</button>
-            </form>
-            <form class='update'>
-                <h1>Update an Employee</h1>
-                <div>
-                    <label for='pickFlight'>Pick an employee to modify</label>
-                    <select name='pickFlight' id="update-crew-member-employeeID">
-                        <option value='1'>1</option>
-                        <option value='2'>2</option>
-                        <option value='3'>3</option>
-                        <option value='4'>4</option>
-                        <option value='5'>5</option>
-                        <option value='6'>6</option>
-                    </select>
-                </div>
-                <div>
-                    <label for='firstName'>Enter the first name of the employee:</label>
-                    <input name='firstName' id="update-crew-member-firstName"></input>
-                </div>
-                <div>
-                    <label for='lastName'>Enter the last name of the employee:</label>
-                    <input name='lastName' id="update-crew-member-lastName"></input>
-                </div>
-                <div>
-                    <label for='salary'>Update their salary:</label>
-                    <input name='salary' id="update-crew-member-salary"></input>
-                </div>
-                <div>
-                    <label for='yearsExpr'>Update their years of experience:</label>
-                    <input name='yearsExpr' id="update-crew-member-yrsExp"></input>
-                </div>
-                <div>
-                    <label for='role'>Update their role:</label>
-                    <input name='role' id="update-crew-member-role"></input>    
-                </div>
-                <div>
-                    <label for='homeAirId'>Update their home airport:</label>
-                    <select name='homeAirId' id="update-crew-member-airportID">
-                        <option value='12'>12</option>
-                        <option value='23'>23</option>
-                        <option value='34'>34</option>
-                        <option value='45'>45</option>
-                        <option value='47'>47</option>
-                        <option value='56'>56</option>
-                        <option value='65'>65</option>
-                        <option value='67'>67</option>
-                        <option value='71'>71</option>
-                        <option value='78'>78</option>
-                        <option value='89'>89</option>
-                        <option value='100'>100</option>
-                    </select>
-                </div>
-                <button type="button" onclick="update_crew_member_record()">Update</button>
-            </form>
-            <form class='delete'>
-                <h1>Delete an Employee</h1>
-                <div>
-                    <label for='deleteFlight'>Please pick which crew member that you would like to remove</label>
-                    <select name='deleteFlight' id="delete-crew-member-id">
-                        <option value='1'>1</option>
-                        <option value='2'>2</option>
-                        <option value='3'>3</option>
-                        <option value='4'>4</option>
-                        <option value='5'>5</option>
-                        <option value='6'>6</option>
-                    </select>
-                    <button type="button" onclick="delete_crew_member_record()">Delete</button>
-                </div>
-            </form>
-        </div>
-      </section>
-
-  </body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Beavs Airlines</title>
+        <link rel="stylesheet" href="/style.css">
+        <script src="crew.js"></script>
+        <script src="main.js"></script>
+    </head>
+    <body>
+        <nav class='navbar'>
+            <a href='index'>Go Beavs!</a>
+            <ul class='navlist'>
+                <li><a href='flightCrew'>Flight Crew</a>
+                <li>
+                <li><a href='flightPassenger'>Flight Passengers</a></li>
+                <li><a href='airports'>Airports</a></li>
+                <li><a href='passengers'>Passengers</a></li>
+                <li><a href='crew'>Crew Members</a></li>
+                <li><a href='flights'>Flights</a></li>
+            </ul>
+        </nav>
+        <table style="width: 100%;">
+            <tr>
+                <th>employeeID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Salary</th>
+                <th>Years of Experience</th>
+                <th>Role</th>
+                <th>Homebase Airport</th>
+            </tr>
+            <tr>
+                <th>1</th>
+                <th>John</th>
+                <th>Smith</th>
+                <th>$90000</th>
+                <th>4</th>
+                <th>First Officer</th>
+                <th>JFK</th>
+            </tr>
+        </table>
+        <section class='crud'>
+            <div class='options'>
+                <form class='create'>
+                    <h1>Add an Employee</h1>
+                    <div>
+                        <label for='firstName'>Enter the first name of the employee:</label>
+                        <input name='firstName' id="add-crew-member-firstName"></input>
+                    </div>
+                    <div>
+                        <label for='lastName'>Enter the last name of the employee:</label>
+                        <input name='lastName' id="add-crew-member-lastName"></input>
+                    </div>
+                    <div>
+                        <label for='salary'>Enter employee's salary:</label>
+                        <input name='salary' id="add-crew-member-salary"></input>
+                    </div>
+                    <div>
+                        <label for='yearsExpr'>Enter how many years experience the employee has:</label>
+                        <input name='yearsExpr' id="add-crew-member-yrsExp"></input>
+                    </div>
+                    <div>
+                        <label for='role'>What's the employee's role:</label>
+                        <input name='role' id="add-crew-member-role"></input>    
+                    </div>
+                    <div>
+                        <label for='homeAirId'>What airport is their home location</label>
+                        <select name='homeAirId' id="add-crew-member-airportID">
+                            <option value='1'>JFK</option>
+                        </select>
+                    </div>
+                    <button type="button" onclick="add_crew_member_record()">Add</button>
+                </form>
+                <form class='update'>
+                    <h1>Update an Employee</h1>
+                    <div>
+                        <label for='pickFlight'>Pick an employee to modify</label>
+                        <select name='pickFlight' id="update-crew-member-employeeID">
+                            <option value='1'>1: John Smith</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for='firstName'>Enter the first name of the employee:</label>
+                        <input name='firstName' id="update-crew-member-firstName"></input>
+                    </div>
+                    <div>
+                        <label for='lastName'>Enter the last name of the employee:</label>
+                        <input name='lastName' id="update-crew-member-lastName"></input>
+                    </div>
+                    <div>
+                        <label for='salary'>Update their salary:</label>
+                        <input name='salary' id="update-crew-member-salary"></input>
+                    </div>
+                    <div>
+                        <label for='yearsExpr'>Update their years of experience:</label>
+                        <input name='yearsExpr' id="update-crew-member-yrsExp"></input>
+                    </div>
+                    <div>
+                        <label for='role'>Update their role:</label>
+                        <input name='role' id="update-crew-member-role"></input>    
+                    </div>
+                    <div>
+                        <label for='homeAirId'>Update their home airport:</label>
+                        <select name='homeAirId' id="update-crew-member-airportID">
+                            <option value='1'>JFK</option>
+                        </select>
+                    </div>
+                    <button type="button" onclick="update_crew_member_record()">Update</button>
+                </form>
+                <form class='delete'>
+                    <h1>Delete an Employee</h1>
+                    <div>
+                        <label for='deleteFlight'>Please pick which crew member that you would like to remove</label>
+                        <select name='deleteFlight' id="delete-id">
+                            <option value='1'>1: John Smith</option>
+                        </select>
+                        <button type="button" onclick="delete_record('crew')">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </body>
 </html>

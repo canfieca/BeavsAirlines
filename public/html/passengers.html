@@ -1,119 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Beavs Airlines</title>
-    <link rel="stylesheet" href="/style.css">
-    <script src="passengers.js"></script>
-  </head>
-  <body>
-
-    <nav class='navbar'>
-      <a href='index.html'>Go Beavs!</a>
-      <ul class='navlist'>
-          <li><a href='flightCrew.html'>Flight Crew</a><li>
-          <li><a href='flightPassenger.html'>Flight Passengers</a></li>
-          <li><a href='airports.html'>Airports</a></li>
-          <li><a href=passengers.html>Passengers</a></li>
-          <li><a href='crew.html'>Crew Members</a></li>
-          <li><a href='flights.html'>Flights</a></li>
-      </ul>
-  </nav>
-
-    <table>
-        <tr>
-            <th>passengerID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Harry</td>
-            <td>Carson</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Sam</td>
-            <td>Huff</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Eli</td>
-            <td>Manning</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Frank</td>
-            <td>Gifford</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Odell</td>
-            <td>Beckham Jr.</td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>Emlen</td>
-            <td>Tunnell</td>
-          </tr>
-    </table>
-
-      <section class='crud'>
-        <div class='options'>
-            <form class='create'>
-                <h1>Add a Passenger</h1>
-                <div>
-                    <label for='firstName'>Enter the first name of the passenger:</label>
-                    <input name='firstName' id="add-passenger-firstName"></input>
-                </div>
-                <div>
-                    <label for='lastName'>Enter the last name of the passenger:</label>
-                    <input name='lastName' id="add-passenger-lastName"></input>
-                </div>
-                <button type="button" onclick="add_passenger_record()">Add</button>
-            </form>
-            <form class='update'>
-                <h1>Update a Passenger</h1>
-                <div>
-                    <label for='pickPassenger'>Pick a passenger to modify</label>
-                    <select name='pickPassenger' id="update-passenger-id">
-                        <option value='1'>1</option>
-                        <option value='2'>2</option>
-                        <option value='3'>3</option>
-                        <option value='4'>4</option>
-                        <option value='5'>5</option>
-                        <option value='6'>6</option>
-                    </select>
-                </div>
-                <div>
-                    <label for='firstName'>Update their first name</label>
-                    <input name='firstName' id="update-passenger-firstName"></input>
-                </div>
-                <div>
-                    <label for='lastName'>Update their last name:</label>
-                    <input name='lastName' id="update-passenger-lastName"></input>
-                </div>
-                <button type="button" onclick="update_passenger_record()">Update</button>
-            </form>
-            <form class='delete'>
-                <h1>Delete a Passenger</h1>
-                <div>
-                    <label for='deleteFlight'>Please pick which passenger that you would like to remove</label>
-                    <select name='deleteFlight' id="delete-passenger-id">
-                        <option value='1'>1</option>
-                        <option value='2'>2</option>
-                        <option value='3'>3</option>
-                        <option value='4'>4</option>
-                        <option value='5'>5</option>
-                        <option value='6'>6</option>
-                    </select>
-                    <button type="button" onclick="delete_passenger_record()">Delete</button>
-                </div>
-            </form>
-        </div>
-      </section>
-
-  </body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Beavs Airlines</title>
+        <link rel="stylesheet" href="/style.css">
+        <script src="passengers.js"></script>
+        <script src="main.js"></script>
+    </head>
+    <body>
+        <nav class='navbar'>
+            <a href='index'>Go Beavs!</a>
+            <ul class='navlist'>
+                <li><a href='flightCrew'>Flight Crew</a>
+                <li>
+                <li><a href='flightPassenger'>Flight Passengers</a></li>
+                <li><a href='airports'>Airports</a></li>
+                <li><a href=passengers>Passengers</a></li>
+                <li><a href='crew'>Crew Members</a></li>
+                <li><a href='flights'>Flights</a></li>
+            </ul>
+        </nav>
+        <table>
+            <tr>
+                <th>passengerID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+            </tr>
+            <tr>
+                <th>1</th>
+                <th>Henry</th>
+                <th>Ford</th>
+            </tr>
+        </table>
+        <section class='crud'>
+            <div class='options'>
+                <form class='create'>
+                    <h1>Add a Passenger</h1>
+                    <div>
+                        <label for='firstName'>Enter the first name of the passenger:</label>
+                        <input name='firstName' id="add-passenger-firstName"></input>
+                    </div>
+                    <div>
+                        <label for='lastName'>Enter the last name of the passenger:</label>
+                        <input name='lastName' id="add-passenger-lastName"></input>
+                    </div>
+                    <button type="button" onclick="add_passenger_record()">Add</button>
+                </form>
+                <form class='update'>
+                    <h1>Update a Passenger</h1>
+                    <div>
+                        <label for='pickPassenger'>Pick a passenger to modify</label>
+                        <select name='pickPassenger' id="update-passenger-id">
+                            <option value='1'>1: Henry Ford</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for='firstName'>Update their first name</label>
+                        <input name='firstName' id="update-passenger-firstName"></input>
+                    </div>
+                    <div>
+                        <label for='lastName'>Update their last name:</label>
+                        <input name='lastName' id="update-passenger-lastName"></input>
+                    </div>
+                    <button type="button" onclick="update_passenger_record()">Update</button>
+                </form>
+                <form class='delete'>
+                    <h1>Delete a Passenger</h1>
+                    <div>
+                        <label for='deleteFlight'>Please pick which passenger that you would like to remove</label>
+                        <select name='deleteFlight' id="delete-id">
+                            <option value='1'>1: Henry Ford</option>
+                        </select>
+                        <button type="button" onclick="delete_record('passengers')">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </body>
 </html>
