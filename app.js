@@ -32,6 +32,9 @@ var load = require('./helpers/load');
 const os = require('os');
 console.log("Hostname: http://" + os.hostname() + ":" + JSON.stringify(port));
 
+// import body parser so we can extract data from POST requests
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
 
 // Information logger function
 app.use(function (req, res, next) {
@@ -85,6 +88,7 @@ app.get('/:file', function(req, res) {
 })
 
 
+// handle all CRUD functionalities for all tables
 app.post('/:crud_type/:table', function(req, res) {
 
 	// get information about what type of request this is 
@@ -92,27 +96,19 @@ app.post('/:crud_type/:table', function(req, res) {
 	const crud_type = req.params.crud_type;
 	const table = req.params.table;
 
-	// get data from request body
-	var data = "";
-	req.on("data", chunk => {
-		data += chunk;
-	});
-	
-	req.on("end", () => {
+	// construct the appropriate mySQL query
+	var query;
+	if (crud_type === 'add')
+		query = db_queries.make_insert_query(table, req.body);
 
-		// convert string into JSON object
-		var record_info = JSON.parse(data);
+	else if (crud_type === 'update')
+		query = db_queries.make_update_query(table, req.body);
 
-		if (crud_type === 'add')
-			var query = db_queries.make_insert_query(table, record_info);
-		else if (crud_type === 'update')
-			var query = db_queries.make_update_query(table, record_info);
-		else if (crud_type === 'delete')
-			var query = db_queries.make_delete_query(table, record_info);
+	else if (crud_type === 'delete')
+		query = db_queries.make_delete_query(table, req.body);
 
-		// delete record from DB
-		db.pool.query(query);
-	});
+	// perform operation on DB
+	db.pool.query(query);
 
 	// send message back so client reloads page
 	res.status(200).send("Success");	
