@@ -44,6 +44,7 @@ CREATE OR REPLACE TABLE CrewMembers (
   homebaseAirportID int(11),
   PRIMARY KEY (employeeID),
   FOREIGN KEY (homebaseAirportID) REFERENCES Airports(airportID)
+  ON DELETE CASCADE
 );
 
 --
@@ -65,8 +66,10 @@ CREATE OR REPLACE TABLE Flights (
   srcAirportID int(11) NOT NULL,
   destAirportID int(11) NOT NULL,
   PRIMARY KEY (flightID),
-  FOREIGN KEY (srcAirportID) REFERENCES Airports(airportID),
+  FOREIGN KEY (srcAirportID) REFERENCES Airports(airportID)
+  ON DELETE CASCADE,
   FOREIGN KEY (destAirportID) REFERENCES Airports(airportID)
+  ON DELETE CASCADE
 );
 
 --
