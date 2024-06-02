@@ -48,6 +48,8 @@ app.get('/', function(req, res) {
 });
 
 app.get('/:file', function(req, res) {
+
+	// determine which file is being requested by client
 	const file = req.params.file;
 
 	if (file === 'index') 
@@ -82,9 +84,12 @@ app.get('/:file', function(req, res) {
 		res.status(404).send('<h1>Error, could not find page</h1>');
 })
 
-app.post('/add/:table', function(req, res) {
 
-	// get which entity is being added to
+app.post('/:crud_type/:table', function(req, res) {
+
+	// get information about what type of request this is 
+	// and on what table to perform the operation on
+	const crud_type = req.params.crud_type;
 	const table = req.params.table;
 
 	// get data from request body
@@ -92,82 +97,26 @@ app.post('/add/:table', function(req, res) {
 	req.on("data", chunk => {
 		data += chunk;
 	});
-
-	req.on("end", () => {
-		
-		// convert string into JSON object
-		var record_info = JSON.parse(data);
-
-		var query = db_queries.make_insert_query(table, record_info);
-
-		console.log(query)
-
-		// add record to DB
-		db.pool.query(query, function(err, results, fields) {
-			console.log(err, results)
-		});
-	});
-
-	// send message back so client reloads page
-	res.status(200).send("Success");
-})
-
-app.post('/update/:table', function(req, res) {
-
-	// get which entity is being added to
-	const table = req.params.table;
-
-	// get data from request body
-	var data = "";
-	req.on("data", chunk => {
-		data += chunk;
-	});
-
-	req.on("end", () => {
-		
-		// convert string into JSON object
-		var record_info = JSON.parse(data);
-
-		var query = db_queries.make_update_query(table, record_info);
-
-		console.log(query)
-
-		// update record in DB
-		db.pool.query(query, function(err, results, fields) {
-			console.log(err, results)
-		});
-	});
-
-	// send message back so client reloads page
-	res.status(200).send("Success");
-})
-
-
-app.post('/delete/:table', function(req, res) {
-
-	// get which entity is being added to
-	const table = req.params.table;
-
-	// get data from request body
-	var data = "";
-	req.on("data", chunk => {
-		data += chunk;
-	});
-
+	
 	req.on("end", () => {
 
 		// convert string into JSON object
 		var record_info = JSON.parse(data);
 
-		var query = db_queries.make_delete_query(table, record_info);
+		if (crud_type === 'add')
+			var query = db_queries.make_insert_query(table, record_info);
+		else if (crud_type === 'update')
+			var query = db_queries.make_update_query(table, record_info);
+		else if (crud_type === 'delete')
+			var query = db_queries.make_delete_query(table, record_info);
 
 		// delete record from DB
 		db.pool.query(query);
 	});
 
 	// send message back so client reloads page
-	res.status(200).send("Success");
-});
+	res.status(200).send("Success");	
+})
 
 // Listener
 app.listen(port);
