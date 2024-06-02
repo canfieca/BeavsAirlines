@@ -19,11 +19,11 @@ function make_insert_query(table, data) {
 		query += `Passengers (firstName, lastName) `;
 		query += `VALUES ( '${data.firstName}', '${data.lastName}' );`;
 	}
-	else if (table === 'flightcrew') {
+	else if (table === 'flightCrew') {
 		query += `FlightCrew (flightID, employeeID) `;
 		query += `VALUES ( ${data.flightID}, ${data.employeeID} );`;
 	}
-	else if (table === 'flightpassengers') {
+	else if (table === 'flightPassengers') {
 		query += `FlightPassengers (flightID, passengerID, seatNum, isFirstClass, isCheckedIn) `;
 		query += `VALUES ( ${data.flightID}, ${data.passengerID}, '${data.seatNum}', ${data.isFirstClass}, ${data.isCheckedIn} );`;
 	}
@@ -56,7 +56,7 @@ function make_update_query(table, data) {
 		query += `SET firstName = '${data.firstName}', lastName = '${data.lastName}' `;
 		query += `WHERE passengerID = ${data.passengerID};`;
 	}
-	else if (table === 'flightpassengers') {
+	else if (table === 'flightPassengers') {
 		query += `FlightPassengers `;
 		query += `SET seatNum = '${data.seatNum}', isFirstClass = ${data.isFirstClass}, isCheckedIn = ${data.isCheckedIn} `;
 		query += `WHERE flightID = ${data.flightID} AND passengerID = ${data.passengerID};`;
@@ -86,11 +86,11 @@ function make_delete_query(table, data) {
 		query += `Passengers `;
 		query += `WHERE passengerID = ${data.id};`;
 	}
-	else if (table === 'flightcrew') {
+	else if (table === 'flightCrew') {
 		query += `FlightCrew `;
 		query += `WHERE flightID = ${data.flightID} AND employeeID = ${data.employeeID};`;
 	}
-	else if (table === 'flightpassengers') {
+	else if (table === 'flightPassengers') {
 		query += `FlightPassengers `;
 		query += `WHERE flightID = ${data.flightID} AND passengerID = ${data.passengerID};`;
 	}

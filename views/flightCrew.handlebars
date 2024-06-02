@@ -11,8 +11,8 @@
         <th>CrewMember Name</th>
     </tr>
 
-    {{#each flightcrew_data}}
-        {{> flightcrew_record}}
+    {{#each flightCrew_data}}
+        {{> flightCrew_record}}
     {{/each}}
 
 </table>
@@ -23,7 +23,7 @@
             <h1>Add a Flight Crew Member</h1>
             <div>
                 <label for='flightID'>Pick flight to add</label>
-                <select name='flightID' id="add-flightcrew-flightID">
+                <select name='flightID' id="add-flightCrew-flightID">
 
                     {{#each flights_data}}
                         <option value="{{flightID}}">{{flightID}}: {{srcAirport}} -> {{destAirport}}</option>
@@ -33,7 +33,7 @@
             </div>
             <div>
                 <label for='passengerID'>Pick crew member to add</label>
-                <select name='passengerID' id="add-flightcrew-employeeID">
+                <select name='passengerID' id="add-flightCrew-employeeID">
 
                     {{#each crew_data}}
                         <option value="{{employeeID}}">{{employeeID}}: {{firstName}} {{lastName}}</option>
@@ -41,21 +41,21 @@
                 
                 </select>
             </div>
-            <button type="button" onclick="add_flightcrew_record()">Add</button>
+            <button type="button" onclick="add_flightCrew_record()">Add</button>
         </form>
         
         <form class='delete'>
             <h1>Pick which flight and crew member you'd like to remove</h1>
             <div>
                 <label for='deleteFlightCrew'>Please pick which flight and crew member you'd like to remove</label>
-                <select name='deleteFlightCrew' id="delete-flightcrew-flightID">
+                <select name='deleteFlightCrew' id="delete-flightCrew-flightID">
 
                     {{#each distinct_fc_flights_data}}
                         <option value="{{flightID}}">{{flightID}}: {{srcAirport}} -> {{destAirport}}</option>
                     {{/each}}
 
                 </select>
-				<select name='deleteFlightCrew' id="delete-flightcrew-employeeID">
+				<select name='deleteFlightCrew' id="delete-flightCrew-employeeID">
 
                     {{#each distinct_fc_crew_data}}
                         <option value="{{employeeID}}">{{employeeID}}: {{firstName}} {{lastName}}</option>

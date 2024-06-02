@@ -103,10 +103,10 @@ function send_flight_crew_page(db, res) {
     db.pool.query(fc_query, function(err, flight_crew_results, fields) {
 
         // make a new array of flights that doesn't contain duplicates
-        const distinct_flightcrew_flights = help.get_distinct_flights(flight_crew_results);
+        const distinct_flightCrew_flights = help.get_distinct_flights(flight_crew_results);
 
         // make a new array of crew members that doesn't contain duplicates
-        const distinct_flightcrew_crew = help.get_distinct_crew(flight_crew_results);
+        const distinct_flightCrew_crew = help.get_distinct_crew(flight_crew_results);
 
         // get all flightIDs, srcAirports, and destAirports from Flights
         db.pool.query(f_query, function(err, flights_results, fields) {
@@ -115,13 +115,13 @@ function send_flight_crew_page(db, res) {
             db.pool.query(c_query, function(err, crew_results, fields) {
 
                 // use flight crew, flights, and crew members data to render page
-                res.status(200).render('flightcrew', {
-                    flightcrew_data: flight_crew_results,
+                res.status(200).render('flightCrew', {
+                    flightCrew_data: flight_crew_results,
                     flights_data: flights_results,
                     crew_data: crew_results,
-                    distinct_fc_flights_data: distinct_flightcrew_flights,
-                    distinct_fc_crew_data: distinct_flightcrew_crew,
-                    js_file: 'flightcrew.js'
+                    distinct_fc_flights_data: distinct_flightCrew_flights,
+                    distinct_fc_crew_data: distinct_flightCrew_crew,
+                    js_file: 'flightCrew.js'
                 })
             })
         })
@@ -149,13 +149,13 @@ function send_flight_passenger_page(db, res) {
     var p_query = 'SELECT * FROM Passengers;';
 
     // get flight passengers data from DB
-    db.pool.query(fp_query, function(err, flightpassengers_results, fields) {
+    db.pool.query(fp_query, function(err, flightPassengers_results, fields) {
 
         // make a new array of flights that doesn't contain duplicates
-        const distinct_flightpassengers_flights = help.get_distinct_flights(flightpassengers_results);
+        const distinct_flightPassengers_flights = help.get_distinct_flights(flightPassengers_results);
 
         // make a new array of passengers that doesn't contain duplicates
-        const distinct_flightpassengers_passengers = help.get_distinct_passengers(flightpassengers_results);
+        const distinct_flightPassengers_passengers = help.get_distinct_passengers(flightPassengers_results);
 
         // get all flightIDs, srcAirports, and destAirports from Flights
         db.pool.query(f_query, function(err, flights_results, fields) {
@@ -164,13 +164,13 @@ function send_flight_passenger_page(db, res) {
             db.pool.query(p_query, function(err, passengers_results, fields) {
 
                 // use flight passengers, flights, and passengers data to render page
-                res.status(200).render('flightpassengers', {
-                    flightpassengers_data:       flightpassengers_results,
+                res.status(200).render('flightPassengers', {
+                    flightPassengers_data:       flightPassengers_results,
                     flights_data:                flights_results,
                     passengers_data:             passengers_results,
-                    distinct_fp_flights_data:    distinct_flightpassengers_flights,
-                    distinct_fp_passengers_data: distinct_flightpassengers_passengers,
-                    js_file:                     'flightpassengers.js'
+                    distinct_fp_flights_data:    distinct_flightPassengers_flights,
+                    distinct_fp_passengers_data: distinct_flightPassengers_passengers,
+                    js_file:                     'flightPassengers.js'
                 })
             })
         })

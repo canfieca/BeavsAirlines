@@ -7,7 +7,7 @@
         <title>Beavs Airlines</title>
         <link rel="stylesheet" href="/style.css">
         <script src="index.js"></script>
-        <script src="/flightcrew.js"></script>
+        <script src="/flightCrew.js"></script>
         <script src="/main.js"></script>
     </head>
     <body>
@@ -45,26 +45,26 @@
                     <h1>Add a Flight Crew Member</h1>
                     <div>
                         <label for='flightID'>Pick flight to add</label>
-                        <select name='flightID' id="add-flightcrew-flightID">
+                        <select name='flightID' id="add-flightCrew-flightID">
                             <option value="1">1: JFK -> PDX</option>
                         </select>
                     </div>
                     <div>
                         <label for='passengerID'>Pick crew member to add</label>
-                        <select name='passengerID' id="add-flightcrew-employeeID">
+                        <select name='passengerID' id="add-flightCrew-employeeID">
                             <option value="1">1: John Smith</option>
                         </select>
                     </div>
-                    <button type="button" onclick="add_flightcrew_record()">Add</button>
+                    <button type="button" onclick="add_flightCrew_record()">Add</button>
                 </form>
                 <form class='delete'>
                     <h1>Pick which flight and crew member you'd like to remove</h1>
                     <div>
                         <label for='deleteFlightCrew'>Please pick which flight and crew member you'd like to remove</label>
-                        <select name='deleteFlightCrew' id="delete-flightcrew-flightID">
+                        <select name='deleteFlightCrew' id="delete-flightCrew-flightID">
                             <option value="1">1: JFK -> PDX</option>
                         </select>
-                        <select name='deleteFlightCrew' id="delete-flightcrew-employeeID">
+                        <select name='deleteFlightCrew' id="delete-flightCrew-employeeID">
                             <option value="1">1: John Smith</option>
                         </select>
                     </div>

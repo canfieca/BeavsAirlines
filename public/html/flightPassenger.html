@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Beavs Airlines</title>
         <link rel="stylesheet" href="/style.css">
-        <script src="flightpassenger.js"></script>
+        <script src="flightPassenger.js"></script>
         <script src="main.js"></script>
     </head>
     <body>
@@ -50,67 +50,67 @@
                     <h1>Add a Flight Passenger</h1>
                     <div>
                         <label for='flightID'>Pick a flight</label>
-                        <select name='flightID' id="add-flightpassenger-flightID">
+                        <select name='flightID' id="add-flightPassenger-flightID">
                             <option value="1">1: JFK -> PDX</option>
                         </select>
                     </div>
                     <div>
                         <label for='passengerID'>Pick which passenger you'd like to add to the flight</label>
-                        <select name='passengerID' id="add-flightpassenger-passengerID">
+                        <select name='passengerID' id="add-flightPassenger-passengerID">
                             <option value="1">1: Henry Ford</option>
                         </select>
                     </div>
                     <div>
                         <label for='seatNum'>Enter their seat num</label>
-                        <input name="seatNum" id="add-flightpassenger-seatNum"></input>
+                        <input name="seatNum" id="add-flightPassenger-seatNum"></input>
                     </div>
                     <div>
                         <label for='firstClass'>Are they first class?</label>
-                        <input name="firstClass" type="checkbox" id="add-flightpassenger-isFirstClass"></input>
+                        <input name="firstClass" type="checkbox" id="add-flightPassenger-isFirstClass"></input>
                     </div>
                     <div>
                         <label for='checkedIn'>Are they checked in?</label>
-                        <input name="checkedIn" type="checkbox" id="add-flightpassenger-isCheckedIn"></input>
+                        <input name="checkedIn" type="checkbox" id="add-flightPassenger-isCheckedIn"></input>
                     </div>
-                    <button type="button" onclick="add_flightpassenger_record()">Add</button>
+                    <button type="button" onclick="add_flightPassenger_record()">Add</button>
                 </form>
                 <form class='update'>
                     <h1>Update a Flight Passenger</h1>
                     <div>
                         <label for='pickFlightPassID'>Please pick which flight and passenger you'd like to update</label>
-                        <select name='pickFlightPassID' id="update-flightpassenger-flightID">
+                        <select name='pickFlightPassID' id="update-flightPassenger-flightID">
                             <option value="1">1: JFK -> PDX</option>
                         </select>
-                        <select name='pickFlightPassID' id="update-flightpassenger-passengerID">
+                        <select name='pickFlightPassID' id="update-flightPassenger-passengerID">
                             <option value="1">1: Henry Ford</option>
                         </select>
                     </div>
                     <div>
                         <label for='seatNum'>Change their seat num</label>
-                        <input name="seatNum" id="update-flightpassenger-seatNum"></input>
+                        <input name="seatNum" id="update-flightPassenger-seatNum"></input>
                     </div>
                     <div>
                         <label for='firstClass'>Is first class?</label>
-                        <input name="firstClass" type="checkbox" id="update-flightpassenger-isFirstClass"></input>
+                        <input name="firstClass" type="checkbox" id="update-flightPassenger-isFirstClass"></input>
                     </div>
                     <div>
                         <label for='checkedIn'>Is checked in?</label>
-                        <input name="checkedIn" type="checkbox" id="update-flightpassenger-isCheckedIn"></input>
+                        <input name="checkedIn" type="checkbox" id="update-flightPassenger-isCheckedIn"></input>
                     </div>
-                    <button type="button" onclick="update_flightpassenger_record()">Update</button>
+                    <button type="button" onclick="update_flightPassenger_record()">Update</button>
                 </form>
                 <form class='delete'>
                     <h1>Pick which flight and passenger you'd like to remove</h1>
                     <div>
                         <label for='deleteFlightPassenger'>Please pick which flight and passenger you'd like to remove</label>
-                        <select name='deleteFlightPassenger' id="delete-flightpassenger-flightID">
+                        <select name='deleteFlightPassenger' id="delete-flightPassenger-flightID">
                             <option value="1">1: JFK -> PDX</option>
                         </select>
-                        <select name='pickFlightPassID' id="delete-flightpassenger-passengerID">
+                        <select name='pickFlightPassID' id="delete-flightPassenger-passengerID">
                             <option value="1">1: Henry Ford</option>
                         </select>
                     </div>
-                    <button type="button" onclick="delete_flightpassenger_record()">Delete</button>
+                    <button type="button" onclick="delete_flightPassenger_record()">Delete</button>
                 </form>
             </div>
         </section>
