@@ -79,7 +79,7 @@ app.get('/:file', function(req, res) {
 		load.send_flight_crew_page(db, res);
 	
 	else if (file === 'flightPassenger.html')
-		res.status(200).sendFile('public/html/flightPassenger.html', {root: __dirname});
+		load.send_flight_passenger_page(db, res);
 	
 	else /* TODO: make real 404 page */
 		res.status(404).send('<h1>Error, could not find page</h1>');

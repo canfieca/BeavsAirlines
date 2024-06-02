@@ -112,10 +112,50 @@ function send_flight_crew_page(db, res) {
 }
 
 
+function send_flight_passenger_page(db, res) {
+
+    // construct DB queries
+    var fp_query = 'SELECT fp.flightID, fp.passengerID, a1.name AS srcAirport, a2.name AS destAirport, ';
+    fp_query +=           'p.firstName, p.lastName, fp.seatNum, fp.isFirstClass, fp.isCheckedIn ';
+    fp_query +=    'FROM FlightPassengers fp ';
+    fp_query +=    'JOIN Flights f ON fp.flightID = f.flightID ';
+    fp_query +=    'JOIN Airports a1 ON f.srcAirportID = a1.airportID ';
+    fp_query +=    'JOIN Airports a2 ON f.destAirportID = a2.airportID ';
+    fp_query +=    'JOIN Passengers p ON fp.passengerID = p.passengerID ';
+    fp_query +=    'ORDER BY fp.flightID;';
+
+    var f_query = 'SELECT f.flightID, a1.name AS srcAirport, a2.name AS destAirport ';
+    f_query +=    'FROM Flights f ';
+    f_query +=    'JOIN Airports a1 ON f.srcAirportID = a1.airportID ';
+    f_query +=    'JOIN Airports a2 ON f.destAirportID = a2.airportID;';
+
+    var p_query = 'SELECT * FROM Passengers;';
+
+    // get flight passengers data from DB
+    db.pool.query(fp_query, function(err, flightpassengers_results, fields) {
+
+        // get all flightIDs, srcAirports, and destAirports from Flights
+        db.pool.query(f_query, function(err, flights_results, fields) {
+
+            // get all existing passengers data from DB
+            db.pool.query(p_query, function(err, passengers_results, fields) {
+
+                // use flight passengers, flights, and passengers data to render page
+                res.status(200).render('flightpassengers', {
+                    flightpassengers_data: flightpassengers_results,
+                    flights_data: flights_results,
+                    passengers_data: passengers_results
+                })
+            })
+        })
+    })
+}
+
 module.exports = {
     send_airports_page,
     send_crew_page,
     send_flights_page,
     send_passengers_page,
-    send_flight_crew_page
+    send_flight_crew_page,
+    send_flight_passenger_page
 }

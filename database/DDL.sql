@@ -125,8 +125,8 @@ CREATE OR REPLACE TABLE FlightPassengers (
   flightID int(11) NOT NULL,
   passengerID int(11) NOT NULL,
   seatNum varchar(3) NOT NULL,
-  isFirstClass tinyint(1) NOT NULL,
-  isCheckedIn tinyint(1) NOT NULL,
+  isFirstClass boolean NOT NULL,
+  isCheckedIn boolean NOT NULL,
   FOREIGN KEY (flightID) REFERENCES Flights(flightID)
   ON DELETE CASCADE,
   FOREIGN KEY (passengerID) REFERENCES Passengers(passengerID)

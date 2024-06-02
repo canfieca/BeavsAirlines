@@ -1,0 +1,119 @@
+<script src="flightpassengers.js"></script>
+
+<button onclick="window.history.back()" id="back-button">Click here to go back</button>
+
+<h1 style="margin-left: 50vw; transform: translateX(-25%);">Flight Passengers</h1>
+
+<table>
+    <tr>
+        <th>flightID</th>
+        <th>passengerID</th>
+        <th>Flight</th>
+        <th>Passenger Name</th>
+        <th>seatNum</th>
+        <th>isFirstClass</th>
+        <th>isCheckedIn</th>
+    </tr>
+
+    {{#each flightpassengers_data}}
+        {{> flightpassenger_record}}
+    {{/each}}
+
+</table>
+
+<section class='crud'>
+    <div class='options'>
+        <form class='create'>
+            <h1>Add a Flight Passenger</h1>
+            <div>
+                <label for='flightID'>Pick a flight</label>
+                <select name='flightID' id="add-flightpassenger-flightID">
+                    
+                    {{#each flights_data}}
+                        <option value="{{flightID}}">{{flightID}}: {{srcAirport}} -> {{destAirport}}</option>
+                    {{/each}}
+
+                </select>
+            </div>
+            <div>
+                <label for='passengerID'>Pick which passenger you'd like to add to the flight</label>
+                <select name='passengerID' id="add-flightpassenger-passengerID">
+                    
+                    {{#each passengers_data}}
+                        <option value="{{passengerID}}">{{passengerID}}: {{firstName}} {{lastName}}</option>
+                    {{/each}}
+
+                </select>
+            </div>
+            <div>
+                <label for='seatNum'>Enter their seat num</label>
+                <input name="seatNum" id="add-flightpassenger-seatNum"></input>
+            </div>
+            <div>
+                <label for='firstClass'>Are they first class?</label>
+                <input name="firstClass" type="checkbox" id="add-flightpassenger-isFirstClass"></input>
+            </div>
+            <div>
+                <label for='checkedIn'>Are they checked in?</label>
+                <input name="checkedIn" type="checkbox" id="add-flightpassenger-isCheckedIn"></input>
+            </div>
+            <button type="button" onclick="add_flightpassenger_record()">Add</button>
+        </form>
+
+        <form class='update'>
+            <h1>Update a Flight Passenger</h1>
+            <div>
+                <label for='pickFlightPassID'>Please pick which flight and passenger you'd like to update</label>
+                <select name='pickFlightPassID' id="update-flightpassenger-flightID">
+                    
+                    {{#each flightpassengers_data}}
+                        <option value="{{flightID}}">{{flightID}}: {{srcAirport}} -> {{destAirport}}</option>
+                    {{/each}}
+
+                </select>
+                <select name='pickFlightPassID' id="update-flightpassenger-passengerID">
+                    
+                    {{#each flightpassengers_data}}
+                        <option value="{{passengerID}}">{{passengerID}}: {{firstName}} {{lastName}}</option>
+                    {{/each}}
+
+                </select>
+            </div>
+            <div>
+                <label for='seatNum'>Change their seat num</label>
+                <input name="seatNum" id="update-flightpassenger-seatNum"></input>
+            </div>
+            <div>
+                <label for='firstClass'>Is first class?</label>
+                <input name="firstClass" type="checkbox" id="update-flightpassenger-isFirstClass"></input>
+            </div>
+            <div>
+                <label for='checkedIn'>Is checked in?</label>
+                <input name="checkedIn" type="checkbox" id="update-flightpassenger-isCheckedIn"></input>
+            </div>
+            <button type="button" onclick="update_flightpassenger_record()">Update</button>
+        </form>
+
+        <form class='delete'>
+            <h1>Pick which flight and passenger you'd like to remove</h1>
+            <div>
+                <label for='deleteFlightPassenger'>Please pick which flight and passenger you'd like to remove</label>
+                <select name='deleteFlightPassenger' id="delete-flightpassenger-flightID">
+                    
+                    {{#each flightpassengers_data}}
+                        <option value="{{flightID}}">{{flightID}}: {{srcAirport}} -> {{destAirport}}</option>
+                    {{/each}}
+
+                </select>
+                <select name='pickFlightPassID' id="delete-flightpassenger-passengerID">
+                    
+                    {{#each flightpassengers_data}}
+                        <option value="{{passengerID}}">{{passengerID}}: {{firstName}} {{lastName}}</option>
+                    {{/each}}
+
+                </select>
+            </div>
+            <button type="button" onclick="delete_flightpassenger_record()">Delete</button>
+        </form>
+    </div>
+</section>

@@ -1,0 +1,19 @@
+<tr>
+    <th>{{flightID}}</th>
+    <th>{{passengerID}}</th>
+    <th>{{srcAirport}} -> {{destAirport}}</th>
+    <th>{{firstName}} {{lastName}}</th>
+    <th>{{seatNum}}</th>
+
+    {{#if isFirstClass}}
+        <th>True</th>
+    {{else}}
+        <th>False</th>
+    {{/if}}
+
+    {{#if isCheckedIn}}
+        <th>True</th>
+    {{else}}
+        <th>False</th>
+    {{/if}}
+</tr>

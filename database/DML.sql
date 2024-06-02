@@ -77,14 +77,14 @@ JOIN Airports a2 ON f.destAirportID = a2.airportID
 ORDER BY fc.flightID ASC;
 
 -- FlightPassengers:
-SELECT FlightPassengers.flightID, Passengers.firstName, Passengers.lastName,
-       FlightPasssengers.seatNum, FlightPassengers.isFirstClass,
-       FlightPassengers.isCheckedIn
-FROM FlightPassengers
-INNER JOIN Passengers ON FlightPassengers.passengerID = 
-                         Passengers.passengerID
-GROUP BY FlightPassengers.flightID
-ORDER BY FlightPassengers.flightID ASC;
+SELECT fp.flightID, fp.passengerID, a1.name AS srcAirport, a2.name AS destAirport, 
+       p.firstName, p.lastName, fp.seatNum, fp.isFirstClass, fp.isCheckedIn
+FROM FlightPassengers fp
+JOIN Flights f ON fp.flightID = f.flightID
+JOIN Airports a1 ON f.srcAirportID = a1.airportID
+JOIN Airports a2 ON f.destAirportID = a2.airportID
+JOIN Passengers p ON fp.passengerID = p.passengerID
+ORDER BY fp.flightID;
 
 
 --

@@ -1,4 +1,4 @@
-// flightCrew.js
+// flightcrew.js
 
 function add_flightcrew_record() {
 
