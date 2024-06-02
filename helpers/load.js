@@ -1,4 +1,7 @@
 
+// import helper functions
+var help = require('./helper');
+
 function send_airports_page(db, res) {
 
     // get airport data from DB
@@ -98,6 +101,12 @@ function send_flight_crew_page(db, res) {
     // get flight crew data from DB
     db.pool.query(fc_query, function(err, flight_crew_results, fields) {
 
+        // make a new array of flights that doesn't contain duplicates
+        const distinct_flightcrew_flights = help.get_distinct_flights(flight_crew_results);
+
+        // make a new array of crew members that doesn't contain duplicates
+        const distinct_flightcrew_crew = help.get_distinct_crew(flight_crew_results);
+
         // get all flightIDs, srcAirports, and destAirports from Flights
         db.pool.query(f_query, function(err, flights_results, fields) {
 
@@ -109,6 +118,8 @@ function send_flight_crew_page(db, res) {
                     flightcrew_data: flight_crew_results,
                     flights_data: flights_results,
                     crew_data: crew_results,
+                    distinct_fc_flights_data: distinct_flightcrew_flights,
+                    distinct_fc_crew_data: distinct_flightcrew_crew,
                     js_file: 'flightcrew.js'
                 })
             })
