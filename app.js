@@ -50,10 +50,7 @@ app.get('/', function(req, res) {
 app.get('/:file', function(req, res) {
 	const file = req.params.file;
 
-	/*
-		TODO: remove .html suffix from get requests
-	*/
-	if (file === 'index.html') 
+	if (file === 'index') 
 		res.status(200).render('homepage');
 
 	else if (file === 'style.css') 
@@ -63,22 +60,22 @@ app.get('/:file', function(req, res) {
 	else if (file.slice(-3) === '.js')
 		res.status(200).sendFile('/public/js/' + file, {root: __dirname});
 	
-	else if (file === 'airports.html')
+	else if (file === 'airports')
 		load.send_airports_page(db, res);
 	
-	else if (file === 'crew.html')
+	else if (file === 'crew')
 		load.send_crew_page(db, res);
 	
-	else if (file === 'flights.html')
+	else if (file === 'flights')
 		load.send_flights_page(db, res);
 	
-	else if (file === 'passengers.html')
+	else if (file === 'passengers')
 		load.send_passengers_page(db, res);
 	
-	else if (file === 'flightCrew.html')
+	else if (file === 'flightCrew')
 		load.send_flight_crew_page(db, res);
 	
-	else if (file === 'flightPassenger.html')
+	else if (file === 'flightPassenger')
 		load.send_flight_passenger_page(db, res);
 	
 	else /* TODO: make real 404 page */
