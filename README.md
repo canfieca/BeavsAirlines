@@ -5,7 +5,7 @@ nice UI for a user to interact with our mySQL database.
 
 To run the website:
 
-    1. Clone this repo
+    1. Clone this repo into a directory on the ENGR server
     2. Install npm dependencies:
         npm i --save express mysql handlebars express-handlebars body-parser forever
     3. Run this command:
