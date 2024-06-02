@@ -6,7 +6,8 @@ function send_airports_page(db, res) {
 
         // use handlebars to dynamically generate the page and send it to client
         res.status(200).render('airports', {
-            airports_data: results
+            airports_data: results,
+            js_file: 'airports.js'
         })
     })
 }
@@ -29,7 +30,8 @@ function send_crew_page(db, res) {
 
             res.status(200).render('crew', {
                 crew_data: crew_results,
-                airports_data: airports_results
+                airports_data: airports_results,
+                js_file: 'crew.js'
             })
         })
     })
@@ -54,7 +56,8 @@ function send_flights_page(db, res) {
 
             res.status(200).render('flights', {
                 flights_data: flights_results,
-                airports_data: airports_results
+                airports_data: airports_results,
+                js_file: 'flights.js'
             })
         })
     })
@@ -67,7 +70,8 @@ function send_passengers_page(db, res) {
     db.pool.query('SELECT * FROM Passengers;', function(err, results, fields) {
 
         res.status(200).render('passengers', {
-            passengers_data: results
+            passengers_data: results,
+            js_file: 'passengers.js'
         })
     })
 }
@@ -104,7 +108,8 @@ function send_flight_crew_page(db, res) {
                 res.status(200).render('flightcrew', {
                     flightcrew_data: flight_crew_results,
                     flights_data: flights_results,
-                    crew_data: crew_results
+                    crew_data: crew_results,
+                    js_file: 'flightcrew.js'
                 })
             })
         })
@@ -144,7 +149,8 @@ function send_flight_passenger_page(db, res) {
                 res.status(200).render('flightpassengers', {
                     flightpassengers_data: flightpassengers_results,
                     flights_data: flights_results,
-                    passengers_data: passengers_results
+                    passengers_data: passengers_results,
+                    js_file: 'flightpassengers.js'
                 })
             })
         })
