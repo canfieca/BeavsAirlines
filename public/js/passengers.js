@@ -22,13 +22,3 @@ function update_passenger_record() {
 
     send_custom_fetch_request('update', 'passengers', data);
 }
-
-function delete_passenger_record() {
-
-    // get record to delete (entered by user)
-    var data = {
-        id: document.getElementById('delete-passenger-id').value
-    }
-
-    send_custom_fetch_request('delete', 'passengers', data);
-}

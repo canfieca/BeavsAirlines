@@ -102,14 +102,14 @@
             <h1>Delete an Employee</h1>
             <div>
                 <label for='deleteFlight'>Please pick which crew member that you would like to remove</label>
-                <select name='deleteFlight' id="delete-crew-member-id">
+                <select name='deleteFlight' id="delete-id">
 
                     {{#each crew_data}}
                         <option value='{{employeeID}}'>{{employeeID}}: {{firstName}} {{lastName}}</option>
                     {{/each}}
 
                 </select>
-                <button type="button" onclick="delete_crew_member_record()">Delete</button>
+                <button type="button" onclick="delete_record('crew')">Delete</button>
             </div>
         </form>
     </div>

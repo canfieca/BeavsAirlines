@@ -54,14 +54,14 @@
             <h1>Delete a Passenger</h1>
             <div>
                 <label for='deleteFlight'>Please pick which passenger that you would like to remove</label>
-                <select name='deleteFlight' id="delete-passenger-id">
+                <select name='deleteFlight' id="delete-id">
 
                     {{#each passengers_data}}
                         <option value='{{passengerID}}'>{{passengerID}}: {{firstName}} {{lastName}}</option>
                     {{/each}}
 
                 </select>
-				<button type="button" onclick="delete_passenger_record()">Delete</button>
+				<button type="button" onclick="delete_record('passengers')">Delete</button>
 			</div>
         </form>
     </div>

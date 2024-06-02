@@ -14,3 +14,14 @@ function send_custom_fetch_request(crud_type, table, data) {
         window.location.reload();
     })
 }
+
+
+function delete_record(table) {
+
+    // get record to delete (entered by user)
+    const data = {
+        id: document.getElementById('delete-id').value
+    }
+
+    send_custom_fetch_request('delete', table, data);
+}

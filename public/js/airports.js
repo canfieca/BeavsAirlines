@@ -26,13 +26,3 @@ function update_airport_record() {
 
     send_custom_fetch_request('update', 'airports', data);
 }
-
-function delete_airport_record() {
-
-    // get record to delete (entered by user)
-    var data = {
-        id: document.getElementById('delete-airport-id').value
-    };
-
-    send_custom_fetch_request('delete', 'airports', data);
-}

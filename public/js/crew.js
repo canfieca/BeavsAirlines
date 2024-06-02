@@ -30,13 +30,3 @@ function update_crew_member_record() {
 
     send_custom_fetch_request('update', 'crew', data);
 }
-
-function delete_crew_member_record() {
-
-    // get record to delete (entered by user)
-    const data = {
-        id: document.getElementById('delete-crew-member-id').value
-    }
-
-    send_custom_fetch_request('delete', 'crew', data);
-}

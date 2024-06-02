@@ -99,7 +99,7 @@
             <h1>Delete the Flight</h1>
             <div>
                 <label for='deleteFlight'>Please pick which flight that you would like to remove</label>
-                <select name='deleteFlight' id="delete-flight-id">
+                <select name='deleteFlight' id="delete-id">
                     
                     {{#each flights_data}}
                         <option value="{{flightID}}">{{flightID}}</option>
@@ -107,7 +107,7 @@
 
                 </select>
             </div>
-            <button type="button" onclick="delete_flight_record()">Delete</button>
+            <button type="button" onclick="delete_record('flights')">Delete</button>
         </form>
     </div>
 </section>

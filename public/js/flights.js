@@ -29,13 +29,3 @@ function update_flight_record() {
 
     send_custom_fetch_request('update', 'flights', data);
 }
-
-
-function delete_flight_record() {
-
-    const data = {
-        id: document.getElementById('delete-flight-id').value
-    }
-
-    send_custom_fetch_request('delete', 'flights', data);
-}

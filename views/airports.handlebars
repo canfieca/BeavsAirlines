@@ -75,14 +75,14 @@
 			<h1>Delete an Airport</h1>
 			<div>
 				<label for='pickAirport'>Pick an airport to delete from the list</label>
-				<select name='pickAirport' id="delete-airport-id">
+				<select name='pickAirport' id="delete-id">
 
                     {{#each airports_data}}
                         <option value='{{airportID}}'>{{airportID}}: {{name}}</option>
                     {{/each}}
 
                 </select>
-				<button type="button" onclick="delete_airport_record()">Delete</button>
+				<button type="button" onclick="delete_record('airports')">Delete</button>
 			</div>
         </form>
     </div>
