@@ -1,5 +1,5 @@
 
-<table style="width: 100%;">
+<table style="width: 60%;">
     <tr>
         <th>employeeID</th>
         <th>First Name</th>
@@ -8,6 +8,7 @@
         <th>Years of Experience</th>
         <th>Role</th>
         <th>Homebase Airport</th>
+        <th>Delete</th>
     </tr>
 
     {{#each crew_data}}
@@ -98,7 +99,7 @@
             <button type="button" onclick="update_crew_member_record()">Update</button>
         </form>
 
-        <form class='delete'>
+        {{!-- <form class='delete'>
             <h1>Delete an Employee</h1>
             <div>
                 <label for='deleteFlight'>Please pick which crew member that you would like to remove</label>
@@ -111,6 +112,6 @@
                 </select>
                 <button type="button" onclick="delete_record('crew')">Delete</button>
             </div>
-        </form>
+        </form> --}}
     </div>
 </section>
