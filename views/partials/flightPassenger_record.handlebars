@@ -1,19 +1,21 @@
 <tr>
-    <th>{{flightID}}</th>
-    <th>{{passengerID}}</th>
-    <th>{{srcAirport}} -> {{destAirport}}</th>
-    <th>{{firstName}} {{lastName}}</th>
-    <th>{{seatNum}}</th>
+    <td>{{flightID}}</td>
+    <td>{{passengerID}}</td>
+    <td>{{srcAirport}} -> {{destAirport}}</td>
+    <td>{{firstName}} {{lastName}}</td>
+    <td>{{seatNum}}</td>
 
     {{#if isFirstClass}}
-        <th>True</th>
+        <td>True</td>
     {{else}}
-        <th>False</th>
+        <td>False</td>
     {{/if}}
 
     {{#if isCheckedIn}}
-        <th>True</th>
+        <td>True</td>
     {{else}}
-        <th>False</th>
+        <td>False</td>
     {{/if}}
+
+    <td><button type="button" onclick="delete_flightPassenger_record({{flightID}}, {{passengerID}})">Delete</button></td>
 </tr>

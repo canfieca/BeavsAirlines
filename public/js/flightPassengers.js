@@ -30,12 +30,12 @@ function update_flightPassenger_record() {
 }
 
 
-function delete_flightPassenger_record() {
+function delete_flightPassenger_record(flightID, passengerID) {
 
     // get values input by user
     const data = {
-        flightID: document.getElementById('delete-flightPassenger-flightID').value,
-        passengerID: document.getElementById('delete-flightPassenger-passengerID').value
+        flightID: flightID,
+        passengerID: passengerID
     }
 
     send_custom_fetch_request('delete', 'flightPassengers', data);

@@ -1,5 +1,5 @@
 :root {
-  height: 300vh;
+  height: auto;
 }
 
 ::-webkit-scrollbar {
@@ -226,3 +226,16 @@ table {
   margin: auto;
 }
 
+.options {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  gap: 35px;
+}
+
+.options > form {
+  margin-top: 50px;
+  border: 1px black solid;
+  padding: 10px;
+  border-radius: 10px;
+}
