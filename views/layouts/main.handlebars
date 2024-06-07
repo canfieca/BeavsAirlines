@@ -34,14 +34,19 @@
             <div id="nav-pages">
                 <ul id="nav-links">
                     {{!-- Referenced: https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp --}}
+                    <li><em><ahref="flights">Flights</a></em></li>
                     <div class="dropdown">
-                        <li><em><a class="dropbtn" href="flights">Flights <i class="fa fa-caret-down"></i></a></em></li>
+                        <li><em><a class="dropbtn" href="crew">Crew Members <i class="fa fa-caret-down"></i></a></em></li>
+                        <div class="dropdown-content">
+                            <a href="flightCrew">Flight Crew</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <li><em><a class="dropbtn" href="passengers">Passengers <i class="fa fa-caret-down"></i></a></em></li>
                         <div class="dropdown-content">
                             <a href="flightPassenger">Flight Passengers</a>
                         </div>
                     </div>
-                    <li><em><a href="crew">Crew Members</a></em></li>
-                    <li><em><a href="passengers">Passengers</a></em></li>
                     <li><em><a href="airports">Airports</a></em></li>
                 </ul>
             </div>
