@@ -16,11 +16,11 @@ function send_custom_fetch_request(crud_type, table, data) {
 }
 
 
-function delete_record(table) {
+function delete_record(table, entityID) {
 
     // get record to delete (entered by user)
     const data = {
-        id: document.getElementById('delete-id').value
+        id: entityID
     }
 
     send_custom_fetch_request('delete', table, data);

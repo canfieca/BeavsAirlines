@@ -51,6 +51,8 @@ nav {
   font-size: 25px;
 }
 
+/* Referenced: https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp */
+
 .dropdown {
   float: left;
   display: inline;
@@ -83,7 +85,7 @@ nav {
 
 /* Referenced: https://www.freecodecamp.org/news/build-an-accordion-menu-using-html-css-and-javascript/ */
 
-h1 {
+.accordion-body h1 {
   text-align: center;
 }
 
@@ -218,3 +220,9 @@ table, th, td {
 #addFlight:hover {
   background-color: #45a049; /* Darken the background on hover */
 }
+
+table {
+  width: 50%;
+  margin: auto;
+}
+
