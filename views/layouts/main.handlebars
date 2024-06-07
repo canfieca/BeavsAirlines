@@ -6,11 +6,12 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Beavs Airlines</title>
         <link rel="stylesheet" href="/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="{{js_file}}"></script>
         <script src="main.js"></script>
     </head>
     <body>
-        <nav class='navbar'>
+        {{!-- <nav class='navbar'>
             <a href='index'>Go Beavs!</a>
             <ul class='navlist'>
                 <li><a href='flightCrew'>Flight Crew</a><li>
@@ -20,6 +21,29 @@
                 <li><a href='crew'>Crew Members</a></li>
                 <li><a href='flights'>Flights</a></li>
             </ul>
+        </nav> --}}
+
+        <nav>
+            <a href="index.html">
+                <div id="ourLogo">
+                    <img src="otherplane.png" alt="Our Logo" height="50px" width="50px">
+                    <h1>Beav's <br/>Airline</h1>
+                </div>
+            </a>
+
+            <div id="nav-pages">
+                <ul id="nav-links">
+                    <div class="dropdown">
+                        <li><em><a class="dropbtn" href="flights.html">Flights <i class="fa fa-caret-down"></i></a></em></li>
+                        <div class="dropdown-content">
+                            <a href="#">Flight Passengers</a>
+                        </div>
+                    </div>
+                    <li><em>Crew Members</em></li>
+                    <li><em>Passengers</em></li>
+                    <li><em>Airports</em></li>
+                </ul>
+            </div>
         </nav>
 
         {{{ body }}}

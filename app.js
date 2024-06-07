@@ -87,6 +87,18 @@ app.get('/:file', function(req, res) {
 		res.status(404).render('404');
 })
 
+// New function that gets all of the media that I'll be using
+app.get('/media/:file', function(req, res) {
+    const file = req.params.file;
+    if (file.slice(-4) === '.png')
+        res.status(200).sendFile('/public/media/' + file, {root: __dirname});
+
+	else if (file.slice(-4) === '.mp4')
+		res.status(200).sendFile('/public/media/' + file, {root: __dirname});
+    else
+        res.status(404).render('404');
+});
+
 
 // handle all CRUD functionalities for all tables
 app.post('/:crud_type/:table', function(req, res) {

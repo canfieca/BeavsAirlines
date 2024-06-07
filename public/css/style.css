@@ -1,139 +1,220 @@
-/* Existing styles */
 :root {
-  background-color: #f9eab0;
-  font-family:'Courier New', Courier, monospace;
+  height: 300vh;
+}
+
+::-webkit-scrollbar {
+  width: 0;
 }
 
 body {
-  position: relative;
-  min-height: 100vh;
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
 }
 
-.navbar {
-  display: flex;
-  flex-direction: row;
-}
-
-.navlist {
-  display: flex;
-  flex-direction: row-reverse;
-  list-style: none;
-  width: 100%;
-}
-
-.navlist li {
-  padding: 15px;
-}
-
-#intro-paragraph {
-  margin: 150px;
-  margin-top: 25px;
+p {
+  line-height: 1.6;
+  font-size: 24px;
   text-align: justify;
 }
 
-table {
-  border-collapse: collapse;
-  margin-top: 50px;
-  margin-left: 50%;
-  transform: translateX(-50%);
+#ourLogo img, #ourLogo h1 {
+  display: inline-block;
+  vertical-align: middle;
 }
 
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
+#ourLogo h1 {
+  color: #D73F09;
 }
 
-th {
-  background-color: #f2f2f2;
-  font-weight: bold;
+#ourLogo {
+  display: inline-block;
+  margin-left: 15px;
 }
 
-tr:nth-child(even) {
-  background-color: #f2f2f2;
+nav {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-tr:hover {
-  background-color: #e6e6e6;
+#nav-links {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  list-style-type: none;
 }
 
-.crud {
-  margin-top: auto;
+#nav-links li {
+  display: inline;
+  margin-right: 20px;
   padding: 20px;
-  background-color: #f2f2f2;
+  font-size: 25px;
 }
 
-.options {
+.dropdown {
+  float: left;
+  display: inline;
+  overflow: hidden;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Referenced: https://www.freecodecamp.org/news/build-an-accordion-menu-using-html-css-and-javascript/ */
+
+h1 {
+  text-align: center;
+}
+
+/* Sets the width for the accordion. Sets the margin to 90px on the top and bottom and auto to the left and right */
+
+.accordion {
+  width: 250px;
+  margin-left: 30px;
+  color: black;
+  background-color: white;
+  padding: 45px 45px;
+}
+
+.accordion .container {
+  position: relative;
+  margin: 10px 10px;
+}
+
+/* Positions the labels relative to the .container. Adds padding to the top and bottom and increases font size. Also makes its cursor a pointer */
+
+.accordion .label {
+  position: relative;
+  padding: 10px 0;
+  font-size: 30px;
+  color: black;
+  cursor: pointer;
+}
+
+/* Positions the plus sign 5px from the right. Centers it using the transform property. */
+
+.accordion .label::before {
+  content: '+';
+  color: black;
+  position: absolute;
+  top: 50%;
+  right: -5px;
+  font-size: 30px;
+  transform: translateY(-50%);
+}
+
+/* Hides the content (height: 0), decreases font size, justifies text and adds transition */
+
+.accordion .content {
+  position: relative;
+  background: white;
+  height: 0;
+  font-size: 20px;
+  text-align: left;
+  width: 250px;
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+/* Adds a horizontal line between the contents */
+
+.accordion hr {
+  width: 100;
+  margin-left: 0;
+  border: 1px solid grey;
+}
+
+/* Unhides the content part when active. Sets the height */
+
+.accordion .container.active .content {
+  height: 250px;
+}
+
+/* Changes from plus sign to negative sign once active */
+
+.accordion .container.active .label::before {
+  content: '-';
+  font-size: 30px;
+}
+
+#project-description {
+  margin-top: 50px;
+  width: 75%;
+  margin-right: 15px;
+}
+
+#project-description p {
+  padding-inline: 25px;
+}
+
+.body-section {
   display: flex;
-  flex-direction: row;
 }
 
-.options form {
-  display: flex;
-  display: row;
-}
-
-form {
-  display: flex;
-  direction: column;
-}
-
-.crud .options {
-  display: flex;
-  flex-direction: row;
-}
-
-.crud .options form {
+.pictures {
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
-  margin-right: 20px;
-}
-
-.crud .options form div {
-  display: flex;
-  flex-direction: row;
   align-items: center;
-  margin-bottom: 10px;
-}
-
-.crud .options form div label {
-  margin-right: 10px;
-}
-
-.airportTable {
-  height: 400px;
-  overflow: auto;
-}
-
-/* New styles for side-by-side tables with scrollable content */
-.intersectionBody {
-  display: flex;
   justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  margin-top: 20px;
+  height: 100vh;
 }
 
-.intersectionTable {
-  width: 49%;
-  max-height: 300px;
-  overflow-y: auto;
-  margin-bottom: 20px;
+a {
+  text-decoration: none;
+  color: black;
 }
 
-@media (max-width: 768px) {
-  .intersectionTable {
-    width: 100%;
-  }
+table, th, td {
+  border: 1px solid black;
+  text-align: center;
+  vertical-align: middle;
 }
 
-#back-button {
-  background-color: gray;
-  width: 100px;
-  margin-left: 25px;
-  border-radius: 25px; 
+.flights-table {
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.flightTable-container {
+  position: relative;
+}
+
+#addFlight {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px 20px; /* Add some padding */
+  background-color: #4CAF50; /* A green background */
+  color: white; /* White text */
+  border: none; /* Remove border */
+  cursor: pointer; /* Cursor changes when you hover over it */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Increase font size */
+}
+
+#addFlight:hover {
+  background-color: #45a049; /* Darken the background on hover */
 }
