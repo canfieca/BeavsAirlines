@@ -6,6 +6,7 @@
         <th>employeeID</th>
         <th>Flight</th>
         <th>CrewMember Name</th>
+        <th>Delete</th>
     </tr>
 
     {{#each flightCrew_data}}
@@ -41,7 +42,7 @@
             <button type="button" onclick="add_flightCrew_record()">Add</button>
         </form>
         
-        <form class='delete'>
+        {{!-- <form class='delete'>
             <h1>Pick which flight and crew member you'd like to remove</h1>
             <div>
                 <label for='deleteFlightCrew'>Please pick which flight and crew member you'd like to remove</label>
@@ -61,6 +62,6 @@
                 </select>
             </div>
             <button type="button" id="delete-button" onclick="delete_crew_member()">Delete</button>
-        </form>
+        </form> --}}
     </div>
 </section>

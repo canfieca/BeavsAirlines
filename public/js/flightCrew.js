@@ -12,12 +12,12 @@ function add_flightCrew_record() {
 }
 
 
-function delete_crew_member() {
+function delete_crew_member(flightID, employeeID) {
 
     // Get the values entered by the user
     const data = {
-        flightID: document.getElementById('delete-flightCrew-flightID').value,
-        employeeID: document.getElementById('delete-flightCrew-employeeID').value
+        flightID: flightID,
+        employeeID: employeeID
     }
 
     send_custom_fetch_request('delete', 'flightCrew', data);
