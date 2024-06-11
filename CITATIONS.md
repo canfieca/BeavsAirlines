@@ -21,3 +21,5 @@ any copyright laws. Here's the url: https://www.flaticon.com/free-icon/plane_723
 The code is loosely based off the canvas Node.js Web Application Exploration:
 https://canvas.oregonstate.edu/courses/1958399/pages/exploration-developing-in-node-dot-js?module_item_id=24181856
 
+## Information Logger function in app.js
+I (Steven) copied this small function from Rob Hess's example code from CS 290.

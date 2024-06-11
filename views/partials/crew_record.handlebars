@@ -5,6 +5,12 @@
     <td>${{salary}}</td>
     <td>{{yearsExperience}}</td>
     <td>{{role}}</td>
-    <td>{{homebaseAirport}}</td>
+
+    {{#if homebaseAirport}}
+        <td>{{homebaseAirport}}</td>
+    {{else}}
+        <td>--NULL--</td>
+    {{/if}}
+
     <td><button type="button" onclick="delete_record('crew', {{employeeID}})">Delete</button></td>
 </tr>

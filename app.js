@@ -17,7 +17,7 @@ var exphbs = require('express-handlebars'); // use handlebars templating engine
 var app = express(); // instantiate express object
 const port = 43043;  // set a port number for server to listen on
 
-// setting up handlebars
+// setting up handlebars (sourced from Rob Hess's CS 290 tutorial code)
 app.engine('handlebars', exphbs.engine({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
 
@@ -28,7 +28,7 @@ var db = require('./helpers/db_connector');
 var db_queries = require('./helpers/db_queries');
 var load = require('./helpers/load');
 
-// print the URL the website can be accessed at
+// print the URL the website can be accessed at (sourced from StackOverflow)
 const os = require('os');
 console.log("Hostname: http://" + os.hostname() + ":" + JSON.stringify(port));
 
@@ -36,7 +36,7 @@ console.log("Hostname: http://" + os.hostname() + ":" + JSON.stringify(port));
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
-// Information logger function
+// Information logger function (sourced from Rob Hess's CS 290 tutorial code)
 app.use(function (req, res, next) {
 	console.log("== Request made");
 	console.log("  - Method:", req.method);
@@ -92,7 +92,6 @@ app.get('/media/:file', function(req, res) {
     const file = req.params.file;
     if (file.slice(-4) === '.png')
         res.status(200).sendFile('/public/media/' + file, {root: __dirname});
-
 	else if (file.slice(-4) === '.mp4')
 		res.status(200).sendFile('/public/media/' + file, {root: __dirname});
     else

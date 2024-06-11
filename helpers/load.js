@@ -23,7 +23,7 @@ function send_crew_page(db, res) {
     var query = 'SELECT c.employeeID, c.firstName, c.lastName, c.salary, ';
     query +=           'c.yearsExperience, c.role, a.name AS homebaseAirport ';
     query +=    'FROM CrewMembers c ';
-    query +=    'JOIN Airports a ON c.homebaseAirportID = a.airportID ';
+    query +=    'LEFT JOIN Airports a ON c.homebaseAirportID = a.airportID ';
     query +=    'ORDER BY c.employeeID;';
 
     // get crew member data from DB

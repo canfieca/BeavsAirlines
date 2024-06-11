@@ -54,7 +54,7 @@ SELECT * FROM Passengers;
 SELECT c.employeeID, c.firstName, c.lastName, c.salary, 
        c.yearsExperience, c.role, a.name AS homebaseAirport 
 FROM CrewMembers c
-JOIN Airports a ON c.homebaseAirportID = a.airportID
+LEFT JOIN Airports a ON c.homebaseAirportID = a.airportID
 ORDER BY c.employeeID;
 
 -- Flights:
